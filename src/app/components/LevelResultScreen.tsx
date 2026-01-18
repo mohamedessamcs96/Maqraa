@@ -193,13 +193,14 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
           <motion.button
             onClick={onViewTutors}
             whileTap={{ scale: 0.98 }}
-            className={`w-full bg-gradient-to-r ${levelInfo.color} text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2`}
+            className="w-full py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
+            style={{ backgroundColor: '#059669', color: '#ffffff' }}
           >
             اختر معلمك المناسب
             <ArrowLeft className="w-5 h-5" />
           </motion.button>
 
-          <p className="text-center text-gray-500 text-sm mt-4">
+          <p className="text-center text-sm mt-4" style={{ color: '#6b7280' }}>
             لقد اخترنا لك أفضل المعلمين المناسبين لمستواك
           </p>
         </motion.div>

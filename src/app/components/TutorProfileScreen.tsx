@@ -187,14 +187,16 @@ export function TutorProfileScreen({ tutor, onBack }: TutorProfileScreenProps) {
         <div className="flex gap-3">
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-shadow"
+            className="flex-1 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-shadow"
+            style={{ backgroundColor: '#059669', color: '#ffffff' }}
           >
             <Calendar className="w-5 h-5" />
             احجز الآن
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="p-3.5 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors"
+            className="p-3.5 rounded-xl transition-colors"
+            style={{ backgroundColor: '#f3f4f6', color: '#374151' }}
           >
             <MessageCircle className="w-5 h-5" />
           </motion.button>

@@ -110,7 +110,8 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
             <motion.button
               onClick={handleStartRecording}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 mx-auto"
+              className="px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 mx-auto"
+              style={{ backgroundColor: '#059669', color: '#ffffff' }}
             >
               <Play className="w-5 h-5" />
               ابدأ التسجيل

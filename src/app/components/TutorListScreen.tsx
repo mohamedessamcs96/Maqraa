@@ -139,9 +139,13 @@ export function TutorListScreen({ onSelectTutor, onBack }: TutorListScreenProps)
               onClick={() => setSelectedFilter(filter)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 selectedFilter === filter
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:border-emerald-600'
+                  ? 'border border-transparent'
+                  : 'border border-gray-300 hover:border-emerald-600'
               }`}
+              style={selectedFilter === filter 
+                ? { backgroundColor: '#059669', color: '#ffffff' }
+                : { backgroundColor: '#ffffff', color: '#374151' }
+              }
             >
               {filter}
             </button>

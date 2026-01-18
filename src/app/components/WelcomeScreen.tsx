@@ -93,13 +93,14 @@ export function WelcomeScreen({ onStartTest }: WelcomeScreenProps) {
           <motion.button
             onClick={onStartTest}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
+            className="w-full py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
+            style={{ backgroundColor: '#059669', color: '#ffffff' }}
           >
             <Mic className="w-5 h-5" />
             ابدأ الاختبار الآن
           </motion.button>
 
-          <p className="text-center text-gray-500 text-sm mt-3">
+          <p className="text-center text-sm mt-3" style={{ color: '#6b7280' }}>
             اختبار مجاني لتحديد مستواك • دقيقة واحدة فقط
           </p>
         </motion.div>
