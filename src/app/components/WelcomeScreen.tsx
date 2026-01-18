@@ -8,7 +8,7 @@ interface WelcomeScreenProps {
 
 export function WelcomeScreen({ onStartTest }: WelcomeScreenProps) {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-600 to-teal-700 text-white" dir="rtl">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#059669', color: '#ffffff' }} dir="rtl">
       {/* Header with decorative pattern */}
       <div className="relative overflow-hidden pt-8 pb-6">
         <motion.div 
@@ -18,16 +18,16 @@ export function WelcomeScreen({ onStartTest }: WelcomeScreenProps) {
           className="text-center relative z-10"
         >
           <MiqraaLogo size="large" showTagline={false} />
-          <p className="text-lg text-white/90 italic mt-2">نورٌ يُتلى</p>
+          <p className="text-lg italic mt-2" style={{ color: 'rgba(255,255,255,0.9)' }}>نورٌ يُتلى</p>
         </motion.div>
         
         {/* Decorative circles */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute top-0 left-0 w-32 h-32 rounded-full -translate-x-1/2 -translate-y-1/2" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full translate-x-1/3 translate-y-1/3" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 bg-white rounded-t-[2rem] px-6 py-8 pb-12">
+      <div className="flex-1 rounded-t-[2rem] px-6 py-8 pb-12" style={{ backgroundColor: '#ffffff' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

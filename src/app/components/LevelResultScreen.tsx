@@ -73,7 +73,7 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
   return (
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header with gradient */}
-      <div className={`bg-gradient-to-r ${levelInfo.color} text-white px-6 py-12 relative overflow-hidden`}>
+      <div className="px-6 py-12 relative overflow-hidden" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,17 +83,18 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4"
+            className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"
+            style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
           >
-            <Award className="w-12 h-12" />
+            <Award className="w-12 h-12" style={{ color: '#ffffff' }} />
           </motion.div>
-          <h1 className="text-3xl font-bold mb-2">نتيجة التقييم</h1>
-          <p className="text-white/90">منصة مقرأة • تحليل شامل لأدائك</p>
+          <h1 className="text-3xl font-bold mb-2" style={{ color: '#ffffff' }}>نتيجة التقييم</h1>
+          <p style={{ color: 'rgba(255,255,255,0.9)' }}>منصة مقرأة • تحليل شامل لأدائك</p>
         </motion.div>
         
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+        <div className="absolute top-0 left-0 w-40 h-40 rounded-full -translate-x-1/2 -translate-y-1/2" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
+        <div className="absolute bottom-0 right-0 w-32 h-32 rounded-full translate-x-1/2 translate-y-1/2" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
       </div>
 
       {/* Main content */}

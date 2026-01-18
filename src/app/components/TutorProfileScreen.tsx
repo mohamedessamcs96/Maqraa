@@ -23,10 +23,11 @@ export function TutorProfileScreen({ tutor, onBack }: TutorProfileScreenProps) {
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header with cover */}
       <div className="relative">
-        <div className="h-32 bg-gradient-to-r from-emerald-600 to-teal-600"></div>
+        <div className="h-32" style={{ backgroundColor: '#059669' }}></div>
         <button
           onClick={onBack}
-          className="absolute top-4 right-4 p-2 bg-black/20 backdrop-blur-sm hover:bg-black/30 rounded-full transition-colors text-white"
+          className="absolute top-4 right-4 p-2 hover:bg-black/30 rounded-full transition-colors"
+          style={{ backgroundColor: 'rgba(0,0,0,0.2)', color: '#ffffff' }}
         >
           <ArrowRight className="w-6 h-6" />
         </button>
@@ -40,8 +41,8 @@ export function TutorProfileScreen({ tutor, onBack }: TutorProfileScreenProps) {
               className="w-24 h-24 rounded-2xl border-4 border-white shadow-lg object-cover"
             />
             {tutor.available && (
-              <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-500 border-3 border-white rounded-full flex items-center justify-center">
-                <Clock className="w-4 h-4 text-white" />
+              <div className="absolute -bottom-1 -right-1 w-7 h-7 border-3 border-white rounded-full flex items-center justify-center" style={{ backgroundColor: '#10b981' }}>
+                <Clock className="w-4 h-4" style={{ color: '#ffffff' }} />
               </div>
             )}
           </div>

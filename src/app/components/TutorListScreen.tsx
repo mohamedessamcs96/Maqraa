@@ -105,34 +105,39 @@ export function TutorListScreen({ onSelectTutor, onBack }: TutorListScreenProps)
   return (
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4 shadow-lg">
+      <div className="px-6 py-4 shadow-lg" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
         <div className="flex items-center gap-4 mb-4">
           <button onClick={onBack} className="p-2 hover:bg-white/10 rounded-full transition-colors">
             <ArrowRight className="w-6 h-6" />
           </button>
           <div className="flex-1">
-            <h1 className="text-xl font-bold">معلمو مقرأة</h1>
-            <p className="text-emerald-100 text-sm">{filteredTutors.length} معلم مجاز متاح</p>
+            <h1 className="text-xl font-bold" style={{ color: '#ffffff' }}>معلمو مقرأة</h1>
+            <p className="text-sm" style={{ color: '#d1fae5' }}>{filteredTutors.length} معلم مجاز متاح</p>
           </div>
         </div>
 
         {/* Search bar */}
         <div className="relative">
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: '#9ca3af' }} />
           <input
             type="text"
             placeholder="ابحث عن معلم..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white/20 backdrop-blur-sm text-white placeholder-white/70 pr-12 pl-4 py-3 rounded-xl border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="w-full pr-12 pl-4 py-3 rounded-xl border focus:outline-none focus:ring-2"
+            style={{ 
+              backgroundColor: 'rgba(255,255,255,0.2)', 
+              color: '#ffffff',
+              borderColor: 'rgba(255,255,255,0.3)'
+            }}
           />
         </div>
       </div>
 
       {/* Filters */}
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+      <div className="px-6 py-4 border-b" style={{ backgroundColor: '#f9fafb', borderColor: '#e5e7eb' }}>
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          <Filter className="w-5 h-5 text-gray-600 flex-shrink-0" />
+          <Filter className="w-5 h-5 flex-shrink-0" style={{ color: '#4b5563' }} />
           {filters.map((filter) => (
             <button
               key={filter}

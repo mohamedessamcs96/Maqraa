@@ -57,14 +57,14 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
   return (
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4">
+      <div className="px-6 py-4" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
         <div className="flex items-center gap-4">
           <button onClick={onBack} className="p-2 hover:bg-white/10 rounded-full transition-colors">
             <ArrowRight className="w-6 h-6" />
           </button>
           <div>
-            <h1 className="text-xl font-bold">تقييم مستوى التلاوة</h1>
-            <p className="text-emerald-100 text-sm">منصة مقرأة • نورٌ يُتلى</p>
+            <h1 className="text-xl font-bold" style={{ color: '#ffffff' }}>تقييم مستوى التلاوة</h1>
+            <p className="text-sm" style={{ color: '#d1fae5' }}>منصة مقرأة • نورٌ يُتلى</p>
           </div>
         </div>
       </div>
