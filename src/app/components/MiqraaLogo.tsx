@@ -4,7 +4,7 @@ interface MiqraaLogoProps {
   size?: 'small' | 'medium' | 'large';
   showTagline?: boolean;
 }
-
+//logo 
 export function MiqraaLogo({ size = 'medium', showTagline = false }: MiqraaLogoProps) {
   const sizeClasses = {
     small: 'w-20 h-20',
