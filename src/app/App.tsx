@@ -62,8 +62,8 @@ export default function App() {
   };
 
   return (
-    <div className="size-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50">
-      <div className="w-full max-w-md h-full bg-white shadow-2xl overflow-hidden">
+    <div className="h-full min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50">
+      <div className="w-full h-full max-w-md md:h-[90vh] md:max-h-[900px] md:rounded-3xl bg-white shadow-2xl overflow-hidden">
         {currentScreen === 'welcome' && (
           <WelcomeScreen onStartTest={handleStartTest} />
         )}
