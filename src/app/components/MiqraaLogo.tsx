@@ -18,11 +18,11 @@ export function MiqraaLogo({ size = 'medium', showTagline = false }: MiqraaLogoP
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div 
-        className={`${sizeClasses[size]} bg-emerald-600 rounded-full flex items-center justify-center`}
-      >
-        <span className="text-white text-2xl font-bold">م</span>
-      </div>
+      <img 
+        src="/miqraa-logo.png" 
+        alt="مقرأة" 
+        className={`${sizeClasses[size]} object-contain`}
+      />
       {showTagline && (
         <div className="text-center">
           <p className={`${textSizes[size].tagline} text-gray-600 italic mt-1`}>نورٌ يُتلى</p>
