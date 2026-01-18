@@ -1,5 +1,3 @@
-import logoImage from '../../assets/miqraa-logo.png';
-
 interface MiqraaLogoProps {
   size?: 'small' | 'medium' | 'large';
   showTagline?: boolean;
@@ -21,7 +19,7 @@ export function MiqraaLogo({ size = 'medium', showTagline = false }: MiqraaLogoP
   return (
     <div className="flex flex-col items-center gap-2">
       <img 
-        src={logoImage} 
+        src="/miqraa-logo.png" 
         alt="مقرأة" 
         className={`${sizeClasses[size]} object-contain`}
       />
