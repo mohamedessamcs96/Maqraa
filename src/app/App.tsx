@@ -62,8 +62,8 @@ export default function App() {
   };
 
   return (
-    <div className="h-full min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50">
-      <div className="w-full h-full max-w-md md:h-[90vh] md:max-h-[900px] md:rounded-3xl bg-white shadow-2xl overflow-y-auto">
+    <div className="h-full min-h-screen w-full bg-gradient-to-br from-emerald-50 to-teal-50 md:flex md:items-center md:justify-center">
+      <div className="w-full min-h-screen md:min-h-0 md:h-[90vh] md:max-h-[900px] max-w-md mx-auto md:rounded-3xl bg-white shadow-2xl overflow-y-auto">
         {currentScreen === 'welcome' && (
           <WelcomeScreen onStartTest={handleStartTest} />
         )}

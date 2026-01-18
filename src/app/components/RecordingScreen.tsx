@@ -55,7 +55,7 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-white" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4">
         <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-white">
         {state === 'ready' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

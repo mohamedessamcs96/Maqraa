@@ -20,7 +20,7 @@ export function TutorProfileScreen({ tutor, onBack }: TutorProfileScreenProps) {
   const selectedPkg = packages[selectedPackage];
 
   return (
-    <div className="h-full flex flex-col bg-white" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header with cover */}
       <div className="relative">
         <div className="h-32 bg-gradient-to-r from-emerald-600 to-teal-600"></div>

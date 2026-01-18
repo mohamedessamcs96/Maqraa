@@ -103,7 +103,7 @@ export function TutorListScreen({ onSelectTutor, onBack }: TutorListScreenProps)
   });
 
   return (
-    <div className="h-full flex flex-col bg-white" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4 shadow-lg">
         <div className="flex items-center gap-4 mb-4">

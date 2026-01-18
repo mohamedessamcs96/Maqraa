@@ -8,7 +8,7 @@ interface WelcomeScreenProps {
 
 export function WelcomeScreen({ onStartTest }: WelcomeScreenProps) {
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-emerald-600 to-teal-700 text-white" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-600 to-teal-700 text-white" dir="rtl">
       {/* Header with decorative pattern */}
       <div className="relative overflow-hidden pt-8 pb-6">
         <motion.div 
@@ -27,7 +27,7 @@ export function WelcomeScreen({ onStartTest }: WelcomeScreenProps) {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 bg-white rounded-t-[2rem] px-6 py-8 overflow-y-auto">
+      <div className="flex-1 bg-white rounded-t-[2rem] px-6 py-8 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
