@@ -1,4 +1,4 @@
-import logoImage from 'figma:asset/16a7ecdedfb6845f4734aa6f42a108d5782f840e.png';
+import logoImage from '../../assets/miqraa-logo.png';
 
 interface MiqraaLogoProps {
   size?: 'small' | 'medium' | 'large';
