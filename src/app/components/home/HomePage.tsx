@@ -59,7 +59,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <MiqraaLogo size="small" showTagline={false} />
+            <div className="inline-block p-8 rounded-full" style={{ backgroundColor: '#ad9f4e' }}>
+              <MiqraaLogo size="small" showTagline={false} />
+            </div>
             <h1 className="text-2xl font-bold mt-4">مرحباً بك</h1>
             <p className="text-amber-100 mt-2">استمر في رحلتك القرآنية</p>
           </motion.div>
