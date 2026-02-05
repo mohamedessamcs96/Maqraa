@@ -19,7 +19,7 @@ export function MiqraaLogo({ size = 'medium', showTagline = false }: MiqraaLogoP
   return (
     <div className="flex flex-col items-center gap-2">
       <img 
-        src="/miqraa-logo.png" 
+        src="/miqraa-logo.svg" 
         alt="مقرأة" 
         className={`${sizeClasses[size]} object-contain`}
       />

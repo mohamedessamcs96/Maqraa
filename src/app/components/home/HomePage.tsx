@@ -18,39 +18,39 @@ export function HomePage({ onNavigate }: HomePageProps) {
     {
       id: 'review',
       icon: BookOpen,
-      title: 'مراجعة حفظ',
+      title: 'مراجعة الحفظ',
       description: 'راجع ما حفظته واختبر نفسك',
-      color: 'from-emerald-500 to-teal-500',
+      color: 'from-amber-600 to-yellow-500',
     },
     {
       id: 'recitation',
       icon: Mic,
-      title: 'تصحيح تلاوة',
+      title: 'تصحيح التلاوة',
       description: 'سجل تلاوتك واحصل على تصحيح',
-      color: 'from-blue-500 to-indigo-500',
+      color: 'from-green-700 to-emerald-600',
     },
     {
       id: 'memorization',
       icon: Award,
       title: 'حفظ جديد',
       description: 'ابدأ برنامج حفظ منظم',
-      color: 'from-orange-500 to-red-500',
+      color: 'from-amber-500 to-orange-400',
     },
     {
       id: 'ijazah',
       icon: FileText,
-      title: 'إجازات',
+      title: 'الإجازات',
       description: 'احصل على إجازة قرآنية رسمية',
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-green-600 to-teal-500',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 pb-32" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-green-50 pb-32" dir="rtl">
       {/* Header */}
       <div
         className="relative overflow-hidden pt-8 pb-12"
-        style={{ backgroundColor: '#059669', color: '#ffffff' }}
+        style={{ backgroundColor: '#486837', color: '#ffffff' }}
       >
         <div className="max-w-md mx-auto px-6">
           <motion.div
@@ -61,7 +61,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           >
             <MiqraaLogo size="small" showTagline={false} />
             <h1 className="text-2xl font-bold mt-4">مرحباً بك</h1>
-            <p className="text-emerald-100 mt-2">استمر في رحلتك القرآنية</p>
+            <p className="text-amber-100 mt-2">استمر في رحلتك القرآنية</p>
           </motion.div>
         </div>
       </div>
@@ -123,9 +123,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
       {/* Quick Tips */}
       <div className="max-w-md mx-auto px-4">
-        <div className="bg-blue-50 rounded-2xl p-4 border border-blue-200">
+        <div className="bg-amber-50 rounded-2xl p-4 border border-amber-200">
           <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-            <Target className="w-5 h-5 text-blue-600" />
+            <Target className="w-5 h-5 text-amber-600" />
             نصيحة اليوم
           </h3>
           <p className="text-sm text-gray-700">
