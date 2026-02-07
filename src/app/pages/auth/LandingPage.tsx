@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { BookOpen, Users, Award, ArrowRight, Star, CheckCircle, Mic, GraduationCap, Users2 } from 'lucide-react';
+import { BookOpen, Users, Award, ArrowRight, Star, CheckCircle, Mic, GraduationCap, Users2, Zap } from 'lucide-react';
 import { useState } from 'react';
 
 interface LandingPageProps {
@@ -54,9 +54,11 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             className="flex items-center gap-2 md:gap-3 flex-shrink-0"
           >
             <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shadow-lg border-4 border-white">
-              <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#ad9f4e] to-[#486837] flex items-center justify-center">
-                <span className="text-lg md:text-2xl">🕌</span>
-              </div>
+              <img 
+                src="/miqraa-logo.svg" 
+                alt="مقرأة" 
+                className="w-10 h-10 md:w-14 md:h-14 object-contain"
+              />
             </div>
             <span className="text-lg md:text-2xl font-bold text-[#486837]">مقرأة</span>
           </motion.div>
@@ -127,7 +129,33 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         </motion.div>
       </section>
 
-      {/* Services Section */}
+      {/* Assessment Section */}
+      <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16 bg-gradient-to-r from-orange-50 to-red-50 rounded-3xl mx-3 md:mx-4 mb-12 md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center"
+        >
+          <div className="flex items-center justify-center mb-4 gap-2">
+            <Zap className="w-6 h-6 text-orange-600" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">اختبر مستواك الآن</h2>
+          </div>
+          <p className="text-sm md:text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+            سجل نفسك في اختبار مدته دقيقة واحدة فقط! سنحلل أدائك ونربطك بأفضل معلم مناسب لمستواك
+          </p>
+          <button
+            onClick={() => window.location.href = '/app'}
+            className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-bold transition inline-flex items-center gap-2 text-base"
+          >
+            <Mic className="w-5 h-5" />
+            ابدأ الاختبار (اختياري)
+            <ArrowRight className="w-5 h-5" />
+          </button>
+          <p className="text-xs md:text-sm text-gray-600 mt-4">
+            يمكنك أيضاً البدء مباشرة بدون اختبار واختيار المعلم يدويًا
+          </p>
+        </motion.div>
+      </section>
       <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 text-gray-900">خدماتنا</h2>
         
@@ -191,9 +219,9 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 text-gray-900">معلمون موثوقون</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-8">
           {[
-            { name: 'أ.د محمد العريان', specialization: 'متخصص في التجويد', rating: 4.9 },
-            { name: 'فاطمة الزهراء', specialization: 'تعليم الأطفال', rating: 4.8 },
-            { name: 'عبدالله الشمري', specialization: 'الحفظ السريع', rating: 4.7 },
+            { name: 'أ.د محمد العريان', specialization: 'متخصص في التجويد', rating: 4.9, gender: 'male' },
+            { name: 'فاطمة الزهراء', specialization: 'تعليم الأطفال', rating: 4.8, gender: 'female' },
+            { name: 'عبدالله الشمري', specialization: 'الحفظ السريع', rating: 4.7, gender: 'male' },
           ].map((teacher, index) => (
             <motion.div
               key={index}
@@ -202,7 +230,38 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition text-center"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-green-600 to-green-800 mx-auto mb-3 md:mb-4" />
+              {/* Teacher Avatar */}
+              <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 flex items-center justify-center">
+                {teacher.gender === 'female' ? (
+                  // Female teacher with niqab
+                  <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    {/* Head background */}
+                    <circle cx="50" cy="35" r="18" fill="#d4a574" />
+                    {/* Niqab - dark fabric */}
+                    <ellipse cx="50" cy="48" rx="22" ry="26" fill="#1a1a2e" />
+                    {/* Eyes area - niqab opening */}
+                    <ellipse cx="42" cy="42" rx="2.5" ry="3.5" fill="#333" />
+                    <ellipse cx="58" cy="42" rx="2.5" ry="3.5" fill="#333" />
+                    {/* Face area visible above niqab */}
+                    <ellipse cx="50" cy="38" rx="16" ry="12" fill="#d4a574" />
+                    {/* Hijab/headscarf */}
+                    <path d="M 32 28 Q 50 15 68 28 Q 70 35 68 40 L 32 40 Q 30 35 32 28" fill="#2d5016" />
+                  </svg>
+                ) : (
+                  // Male teacher
+                  <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    {/* Head */}
+                    <circle cx="50" cy="35" r="18" fill="#d4a574" />
+                    {/* Beard/lower face */}
+                    <ellipse cx="50" cy="50" rx="12" ry="10" fill="#8b6f47" />
+                    {/* Eyes */}
+                    <circle cx="44" cy="32" r="2" fill="#333" />
+                    <circle cx="56" cy="32" r="2" fill="#333" />
+                    {/* Hair/kufi */}
+                    <path d="M 32 25 Q 50 10 68 25 Q 70 32 68 35 L 32 35 Q 30 32 32 25" fill="#333" />
+                  </svg>
+                )}
+              </div>
               <h3 className="font-bold text-base md:text-lg mb-2">{teacher.name}</h3>
               <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4">{teacher.specialization}</p>
               <div className="flex items-center justify-center gap-2">
