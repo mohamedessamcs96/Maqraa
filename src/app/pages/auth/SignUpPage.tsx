@@ -57,9 +57,9 @@ export function SignUpPage({ initialRole = 'learner' }: SignUpPageProps) {
 
       // Redirect based on role
       if (formData.role === 'teacher') {
-        setTimeout(() => navigate('/teacher/application'), 1000);
+        setTimeout(() => navigate('/teacher/documents'), 1000);
       } else {
-        setTimeout(() => navigate('/learner/onboarding'), 1000);
+        setTimeout(() => navigate('/learner/assessment'), 1000);
       }
     } catch (error) {
       setErrors({ submit: 'حدث خطأ في التسجيل' });
@@ -80,8 +80,8 @@ export function SignUpPage({ initialRole = 'learner' }: SignUpPageProps) {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">تم التسجيل بنجاح!</h2>
           <p className="text-gray-600 mb-6">
             {formData.role === 'teacher'
-              ? 'سيتم توجيهك إلى نموذج التقديم'
-              : 'سيتم توجيهك إلى الإعدادات الأساسية'}
+              ? 'سيتم توجيهك لرفع مستنداتك'
+              : 'سيتم توجيهك لاختبار المستوى'}
           </p>
         </motion.div>
       </div>
