@@ -40,18 +40,16 @@ export function AssessmentFlow() {
   };
 
   return (
-    <div className="w-full h-full min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center p-3 md:p-4">
-      <div className="w-full h-full min-h-screen sm:min-h-auto sm:max-w-md sm:rounded-3xl bg-white shadow-2xl overflow-y-auto">
-        {currentScreen === 'welcome' && (
-          <WelcomeScreen onStartTest={handleStartTest} />
-        )}
-        {currentScreen === 'recording' && (
-          <RecordingScreen onComplete={handleTestComplete} onBack={handleBack} />
-        )}
-        {currentScreen === 'result' && (
-          <LevelResultScreen level={userLevel} onViewTutors={handleViewTutors} />
-        )}
-      </div>
+    <div className="min-h-screen" dir="rtl">
+      {currentScreen === 'welcome' && (
+        <WelcomeScreen onStartTest={handleStartTest} />
+      )}
+      {currentScreen === 'recording' && (
+        <RecordingScreen onComplete={handleTestComplete} onBack={handleBack} />
+      )}
+      {currentScreen === 'result' && (
+        <LevelResultScreen level={userLevel} onViewTutors={handleViewTutors} />
+      )}
     </div>
   );
 }
