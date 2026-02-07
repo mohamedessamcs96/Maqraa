@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { learnerGoals } from '../../data/mockData';
 
-interface LearnerOnboardingProps {
-  onNavigate: (path: string) => void;
-}
+interface LearnerOnboardingProps {}
 
-export function LearnerOnboarding({ onNavigate }: LearnerOnboardingProps) {
+export function LearnerOnboarding({}: LearnerOnboardingProps) {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     goals: [] as string[],
@@ -90,7 +90,7 @@ export function LearnerOnboarding({ onNavigate }: LearnerOnboardingProps) {
   const handleNext = () => {
     if (isLastStep) {
       setIsCompleted(true);
-      setTimeout(() => onNavigate('/learner/teachers'), 1000);
+      setTimeout(() => navigate('/learner/teachers'), 1000);
     } else {
       setStep(step + 1);
     }

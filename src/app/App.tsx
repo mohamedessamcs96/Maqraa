@@ -29,6 +29,7 @@ import { LearnerOnboarding } from './pages/learner/LearnerOnboarding';
 import { BrowseTeachers } from './pages/learner/BrowseTeachers';
 import { TeacherProfile } from './pages/learner/TeacherProfile';
 import { LearnerDashboard } from './pages/learner/LearnerDashboard';
+import { AssessmentFlow } from './pages/learner/AssessmentFlow';
 
 export type Screen = 
   | 'welcome' 
@@ -227,11 +228,8 @@ function LegacyApp() {
 // Wrapper component for TeacherProfile with route params
 function TeacherProfileWrapper() {
   const { id } = useParams<{ id: string }>();
-  const navigate = (path: string) => {
-    window.location.href = path;
-  };
   
-  return <TeacherProfile teacherId={id || '1'} onNavigate={navigate} />;
+  return <TeacherProfile teacherId={id || '1'} />;
 }
 
 // Main App Component with Routing
@@ -242,16 +240,17 @@ export default function App() {
         <Router>
           <Routes>
             {/* Platform Pages */}
-            <Route path="/" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
-            <Route path="/landing" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
-            <Route path="/login" element={<LoginPage onNavigate={(path) => window.location.href = path} />} />
-            <Route path="/signup" element={<SignUpPage onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
             
             {/* Learner Pages */}
-            <Route path="/learner/onboarding" element={<LearnerOnboarding onNavigate={(path) => window.location.href = path} />} />
-            <Route path="/learner/teachers" element={<BrowseTeachers onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/learner/onboarding" element={<LearnerOnboarding />} />
+            <Route path="/learner/assessment" element={<AssessmentFlow />} />
+            <Route path="/learner/teachers" element={<BrowseTeachers />} />
             <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
-            <Route path="/learner/dashboard" element={<LearnerDashboard onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/learner/dashboard" element={<LearnerDashboard />} />
             
             {/* Legacy App - redirect to old welcome flow */}
             <Route path="/app" element={<LegacyApp />} />

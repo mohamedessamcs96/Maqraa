@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Mail, Lock, User, AlertCircle } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../context/AuthContext';
 import { UserRole } from '../../types';
 
 interface SignUpPageProps {
-  onNavigate: (path: string) => void;
   initialRole?: UserRole;
 }
 
-export function SignUpPage({ onNavigate, initialRole = 'learner' }: SignUpPageProps) {
-  const { register, isLoading } = useAuth();
+export function SignUpPage({ initialRole = 'learner' }: SignUpPageProps) {
+  const navigate = useNavigate();
+  const { register, isLoading } = useAuthContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -56,9 +57,9 @@ export function SignUpPage({ onNavigate, initialRole = 'learner' }: SignUpPagePr
 
       // Redirect based on role
       if (formData.role === 'teacher') {
-        setTimeout(() => onNavigate('/teacher/application'), 1000);
+        setTimeout(() => navigate('/teacher/application'), 1000);
       } else {
-        setTimeout(() => onNavigate('/learner/onboarding'), 1000);
+        setTimeout(() => navigate('/learner/onboarding'), 1000);
       }
     } catch (error) {
       setErrors({ submit: 'حدث خطأ في التسجيل' });
@@ -239,7 +240,7 @@ export function SignUpPage({ onNavigate, initialRole = 'learner' }: SignUpPagePr
         <p className="text-center mt-6 text-gray-600">
           هل لديك حساب بالفعل؟{' '}
           <button
-            onClick={() => onNavigate('/login')}
+            onClick={() => navigate('/login')}
             className="text-green-700 font-bold hover:underline"
           >
             دخول الآن

@@ -1,14 +1,14 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Search, Star, Filter, X } from 'lucide-react';
 import { mockTeachers } from '../../data/mockData';
 import { Teacher } from '../../types';
 
-interface BrowseTeachersProps {
-  onNavigate: (path: string) => void;
-}
+interface BrowseTeachersProps {}
 
-export function BrowseTeachers({ onNavigate }: BrowseTeachersProps) {
+export function BrowseTeachers({}: BrowseTeachersProps) {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedService, setSelectedService] = useState<string>('');
   const [minRating, setMinRating] = useState(0);
@@ -247,7 +247,7 @@ export function BrowseTeachers({ onNavigate }: BrowseTeachersProps) {
 
                       {/* Actions */}
                       <button
-                        onClick={() => onNavigate(`/learner/teacher/${teacher.id}`)}
+                        onClick={() => navigate(`/learner/teacher/${teacher.id}`)}
                         className="w-full px-4 py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition"
                       >
                         عرض الملف الشخصي

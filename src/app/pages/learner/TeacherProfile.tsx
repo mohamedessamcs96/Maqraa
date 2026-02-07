@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Star, MapPin, Clock, Award, ArrowLeft, MessageCircle } from 'lucide-react';
 import { mockTeachers, mockReviews, mockSessions } from '../../data/mockData';
@@ -6,10 +7,10 @@ import { Teacher } from '../../types';
 
 interface TeacherProfileProps {
   teacherId: string;
-  onNavigate: (path: string) => void;
 }
 
-export function TeacherProfile({ teacherId, onNavigate }: TeacherProfileProps) {
+export function TeacherProfile({ teacherId }: TeacherProfileProps) {
+  const navigate = useNavigate();
   const teacher = mockTeachers.find((t) => t.id === teacherId);
   const teacherReviews = mockReviews.filter((r) => r.teacherId === teacherId);
   const [activeService, setActiveService] = useState(teacher?.services[0].id || '');
@@ -47,7 +48,7 @@ export function TeacherProfile({ teacherId, onNavigate }: TeacherProfileProps) {
       {/* Header with back button */}
       <div className="bg-green-700 text-white p-4 sticky top-0 z-10">
         <button
-          onClick={() => onNavigate('/learner/teachers')}
+          onClick={() => navigate('/learner/teachers')}
           className="flex items-center gap-2 hover:opacity-80 transition"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -185,7 +186,7 @@ export function TeacherProfile({ teacherId, onNavigate }: TeacherProfileProps) {
                     <button
                       key={index}
                       onClick={() =>
-                        onNavigate(
+                        navigate(
                           `/learner/book/${teacherId}?service=${selectedService.id}&date=${slot.date}&time=${slot.time}`
                         )
                       }
@@ -201,7 +202,7 @@ export function TeacherProfile({ teacherId, onNavigate }: TeacherProfileProps) {
 
                 <button
                   onClick={() =>
-                    onNavigate(
+                    navigate(
                       `/learner/book/${teacherId}?service=${selectedService.id}`
                     )
                   }

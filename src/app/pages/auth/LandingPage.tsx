@@ -4,11 +4,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 
-interface LandingPageProps {
-  onNavigate: (path: string) => void;
-}
+interface LandingPageProps {}
 
-export function LandingPage({ onNavigate }: LandingPageProps) {
+export function LandingPage({}: LandingPageProps) {
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuthContext();
   const [email, setEmail] = useState('');
@@ -122,14 +120,14 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-10 md:mb-16">
             <button
-              onClick={() => onNavigate('/signup?role=learner')}
+              onClick={() => navigate('/signup?role=learner')}
               className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition flex items-center justify-center gap-2"
             >
               ابدأ كمتعلم
               <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
             </button>
             <button
-              onClick={() => onNavigate('/signup?role=teacher')}
+              onClick={() => navigate('/signup?role=teacher')}
               className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-[#486837] text-[#486837] rounded-lg font-bold hover:bg-[#486837]/5 transition"
             >
               تقدم كمعلم
@@ -172,7 +170,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             سجل نفسك في اختبار مدته دقيقة واحدة فقط! سنحلل أدائك ونربطك بأفضل معلم مناسب لمستواك
           </p>
           <button
-            onClick={() => window.location.href = '/app'}
+            onClick={() => navigate('/learner/assessment')}
             className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-bold transition inline-flex items-center gap-2 text-base"
           >
             <Mic className="w-5 h-5" />
@@ -230,7 +228,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
                   {services[selectedServiceIndex].description}
                 </p>
                 <button
-                  onClick={() => onNavigate('/signup?role=learner')}
+                  onClick={() => navigate('/signup?role=learner')}
                   className="px-6 md:px-8 py-2 md:py-3 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition inline-flex items-center gap-2"
                 >
                   ابدأ الآن
@@ -301,7 +299,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         </div>
         <div className="text-center">
           <button
-            onClick={() => onNavigate('/learner/teachers')}
+            onClick={() => navigate('/learner/teachers')}
             className="px-5 md:px-6 py-2 md:py-3 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition"
           >
             عرض جميع المعلمين
@@ -322,13 +320,13 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <button
-              onClick={() => onNavigate('/signup?role=learner')}
+              onClick={() => navigate('/signup?role=learner')}
               className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-white text-[#486837] rounded-lg font-bold hover:bg-gray-100 transition"
             >
               إنشاء حساب متعلم
             </button>
             <button
-              onClick={() => onNavigate('/login')}
+              onClick={() => navigate('/login')}
               className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition"
             >
               دخول الحساب

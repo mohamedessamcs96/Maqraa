@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   BookOpen,
@@ -11,14 +12,13 @@ import {
   Bell,
 } from 'lucide-react';
 import { mockTeachers, mockSessions } from '../../data/mockData';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../context/AuthContext';
 
-interface LearnerDashboardProps {
-  onNavigate: (path: string) => void;
-}
+interface LearnerDashboardProps {}
 
-export function LearnerDashboard({ onNavigate }: LearnerDashboardProps) {
-  const { user, logout } = useAuth();
+export function LearnerDashboard({}: LearnerDashboardProps) {
+  const navigate = useNavigate();
+  const { user, logout } = useAuthContext();
   const [notificationCount, setNotificationCount] = useState(1);
 
   const upcomingSessions = mockSessions.filter(
@@ -94,7 +94,7 @@ export function LearnerDashboard({ onNavigate }: LearnerDashboardProps) {
             <button
               onClick={() => {
                 logout();
-                onNavigate('/landing');
+                navigate('/');
               }}
               className="hover:bg-green-600 rounded-full p-2 transition"
             >
@@ -140,7 +140,7 @@ export function LearnerDashboard({ onNavigate }: LearnerDashboardProps) {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">الجلسات القادمة</h2>
                 <button
-                  onClick={() => onNavigate('/learner/sessions')}
+                  onClick={() => navigate('/learner/sessions')}
                   className="text-green-700 hover:text-green-800 font-bold flex items-center gap-1"
                 >
                   عرض الكل
@@ -152,7 +152,7 @@ export function LearnerDashboard({ onNavigate }: LearnerDashboardProps) {
                 <div className="text-center py-8 text-gray-600">
                   <p>لا توجد جلسات قادمة</p>
                   <button
-                    onClick={() => onNavigate('/learner/teachers')}
+                    onClick={() => navigate('/learner/teachers')}
                     className="mt-4 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
                   >
                     احجز جلسة الآن
@@ -207,14 +207,14 @@ export function LearnerDashboard({ onNavigate }: LearnerDashboardProps) {
               className="grid grid-cols-2 gap-4"
             >
               <button
-                onClick={() => onNavigate('/learner/teachers')}
+                onClick={() => navigate('/learner/teachers')}
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition text-center"
               >
                 <BookOpen className="w-8 h-8 text-green-700 mx-auto mb-3" />
                 <p className="font-bold text-gray-900">ابحث عن معلم</p>
               </button>
               <button
-                onClick={() => onNavigate('/learner/sessions')}
+                onClick={() => navigate('/learner/sessions')}
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition text-center"
               >
                 <Clock className="w-8 h-8 text-blue-700 mx-auto mb-3" />

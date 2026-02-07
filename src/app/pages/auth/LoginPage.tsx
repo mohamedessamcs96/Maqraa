@@ -4,11 +4,9 @@ import { motion } from 'motion/react';
 import { Mail, Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuthContext } from '../../context/AuthContext';
 
-interface LoginPageProps {
-  onNavigate: (path: string) => void;
-}
+interface LoginPageProps {}
 
-export function LoginPage({ onNavigate }: LoginPageProps) {
+export function LoginPage({}: LoginPageProps) {
   const navigate = useNavigate();
   const { login, isLoading } = useAuthContext();
   const [formData, setFormData] = useState({
