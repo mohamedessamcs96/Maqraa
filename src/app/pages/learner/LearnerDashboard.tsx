@@ -67,20 +67,20 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
   return (
     <div className="min-h-screen bg-gray-50 pb-20" dir="rtl">
       {/* Header */}
-      <div className="bg-green-700 text-white p-6 sticky top-0 z-10">
+      <div className="bg-green-700 text-white p-4 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">مرحباً {user?.name}</h1>
-            <p className="text-green-100 mt-1">استكمل رحلتك القرآنية اليوم</p>
+            <h1 className="text-xl font-bold">مرحباً {user?.name}</h1>
+            <p className="text-green-100 mt-1 text-sm">استكمل رحلتك القرآنية اليوم</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => {}}
               className="relative hover:bg-green-600 rounded-full p-2 transition"
             >
-              <Bell className="w-6 h-6" />
+              <Bell className="w-5 h-5" />
               {notificationCount > 0 && (
-                <span className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                   {notificationCount}
                 </span>
               )}
@@ -89,7 +89,7 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               onClick={() => {}}
               className="hover:bg-green-600 rounded-full p-2 transition"
             >
-              <Settings className="w-6 h-6" />
+              <Settings className="w-5 h-5" />
             </button>
             <button
               onClick={() => {
@@ -98,7 +98,7 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               }}
               className="hover:bg-green-600 rounded-full p-2 transition"
             >
-              <LogOut className="w-6 h-6" />
+              <LogOut className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -115,13 +115,13 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition"
+                className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition"
               >
-                <div className={`w-12 h-12 rounded-lg ${stat.color} flex items-center justify-center mb-4`}>
-                  <Icon className="w-6 h-6" />
+                <div className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center mb-3`}>
+                  <Icon className="w-5 h-5" />
                 </div>
-                <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-xs text-gray-600 mb-1">{stat.label}</p>
+                <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               </motion.div>
             );
           })}
@@ -135,13 +135,13 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl shadow-lg p-8"
+              className="bg-white rounded-2xl shadow-lg p-5"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">الجلسات القادمة</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-gray-900">الجلسات القادمة</h2>
                 <button
                   onClick={() => navigate('/learner/sessions')}
-                  className="text-green-700 hover:text-green-800 font-bold flex items-center gap-1"
+                  className="text-green-700 hover:text-green-800 font-bold flex items-center gap-1 text-sm"
                 >
                   عرض الكل
                   <ArrowRight className="w-4 h-4" />
@@ -149,11 +149,11 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               </div>
 
               {upcomingSessions.length === 0 ? (
-                <div className="text-center py-8 text-gray-600">
-                  <p>لا توجد جلسات قادمة</p>
+                <div className="text-center py-6 text-gray-600">
+                  <p className="text-sm">لا توجد جلسات قادمة</p>
                   <button
                     onClick={() => navigate('/learner/teachers')}
-                    className="mt-4 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
+                    className="mt-3 px-4 py-2 text-sm bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
                   >
                     احجز جلسة الآن
                   </button>
@@ -168,25 +168,25 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="p-4 border border-gray-200 rounded-lg hover:border-green-700 transition"
+                        className="p-3 border border-gray-200 rounded-lg hover:border-green-700 transition"
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex items-center gap-4">
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-3">
                             <img
                               src={teacher?.photoUrl || ''}
                               alt={teacher?.name}
-                              className="w-12 h-12 rounded-full object-cover"
+                              className="w-10 h-10 rounded-full object-cover"
                             />
                             <div>
-                              <h3 className="font-bold text-gray-900">{teacher?.name}</h3>
-                              <p className="text-sm text-gray-600">{serviceLabels[session.serviceType]}</p>
+                              <h3 className="font-bold text-sm text-gray-900">{teacher?.name}</h3>
+                              <p className="text-xs text-gray-600">{serviceLabels[session.serviceType]}</p>
                             </div>
                           </div>
-                          <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-bold rounded-full">
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
                             {session.status === 'confirmed' ? 'قيد التأكيد' : 'مدفوع'}
                           </span>
                         </div>
-                        <div className="flex items-center justify-between text-sm text-gray-600">
+                        <div className="flex items-center justify-between text-xs text-gray-600">
                           <span>
                             📅 {session.date} - {session.time}
                           </span>
@@ -208,17 +208,17 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
             >
               <button
                 onClick={() => navigate('/learner/teachers')}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition text-center"
+                className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition text-center"
               >
-                <BookOpen className="w-8 h-8 text-green-700 mx-auto mb-3" />
-                <p className="font-bold text-gray-900">ابحث عن معلم</p>
+                <BookOpen className="w-6 h-6 text-green-700 mx-auto mb-2" />
+                <p className="font-bold text-sm text-gray-900">ابحث عن معلم</p>
               </button>
               <button
                 onClick={() => navigate('/learner/sessions')}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition text-center"
+                className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition text-center"
               >
-                <Clock className="w-8 h-8 text-blue-700 mx-auto mb-3" />
-                <p className="font-bold text-gray-900">جلساتي</p>
+                <Clock className="w-6 h-6 text-blue-700 mx-auto mb-2" />
+                <p className="font-bold text-sm text-gray-900">جلساتي</p>
               </button>
             </motion.div>
           </div>
@@ -230,14 +230,14 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
-              className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-6 border border-green-200"
+              className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-4 border border-green-200"
             >
-              <h3 className="font-bold text-lg text-gray-900 mb-4">تقدمك</h3>
-              <div className="space-y-4">
+              <h3 className="font-bold text-base text-gray-900 mb-3">تقدمك</h3>
+              <div className="space-y-3">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-semibold text-gray-700">حفظ الكتاب</span>
-                    <span className="text-sm font-bold text-green-700">45%</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-semibold text-gray-700">حفظ الكتاب</span>
+                    <span className="text-xs font-bold text-green-700">45%</span>
                   </div>
                   <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
@@ -247,9 +247,9 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-semibold text-gray-700">التجويد</span>
-                    <span className="text-sm font-bold text-green-700">60%</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-semibold text-gray-700">التجويد</span>
+                    <span className="text-xs font-bold text-green-700">60%</span>
                   </div>
                   <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
@@ -266,19 +266,19 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-lg p-6"
+              className="bg-white rounded-2xl shadow-lg p-4"
             >
-              <h3 className="font-bold text-lg text-gray-900 mb-4">تقييماتك الأخيرة</h3>
-              <div className="space-y-3">
-                <div className="p-3 bg-yellow-50 rounded-lg">
-                  <div className="flex gap-1 mb-2">
+              <h3 className="font-bold text-base text-gray-900 mb-3">تقييماتك الأخيرة</h3>
+              <div className="space-y-2">
+                <div className="p-2 bg-yellow-50 rounded-lg">
+                  <div className="flex gap-0.5 mb-1">
                     {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">
+                      <span key={i} className="text-yellow-400 text-sm">
                         ⭐
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm text-gray-700">معلم ممتاز جداً</p>
+                  <p className="text-xs text-gray-700">معلم ممتاز جداً</p>
                 </div>
               </div>
             </motion.div>
@@ -288,10 +288,10 @@ export function LearnerDashboard({}: LearnerDashboardProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
-              className="bg-blue-50 rounded-2xl shadow-lg p-6 border border-blue-200"
+              className="bg-blue-50 rounded-2xl shadow-lg p-4 border border-blue-200"
             >
-              <h3 className="font-bold text-lg text-blue-900 mb-4">💡 نصيحة اليوم</h3>
-              <p className="text-sm text-blue-800">
+              <h3 className="font-bold text-base text-blue-900 mb-2">💡 نصيحة اليوم</h3>
+              <p className="text-xs text-blue-800">
                 المراجعة اليومية تساعد على تثبيت الحفظ. حاول مراجعة 5 دقائق في الصباح و10 دقائق في المساء
               </p>
             </motion.div>

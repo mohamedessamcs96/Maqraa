@@ -163,39 +163,35 @@ export function LandingPage({}: LandingPageProps) {
         </motion.div>
       </section>
 
-      {/* Assessment Section */}
-      <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16 bg-gradient-to-r from-orange-50 to-red-50 rounded-3xl mx-3 md:mx-4 mb-12 md:mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
-          <div className="flex items-center justify-center mb-4 gap-2">
-            <span className="text-3xl">⚡</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">اختبر مستواك الآن</h2>
-          </div>
-          <p className="text-sm md:text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
-            سجل نفسك في اختبار مدته دقيقة واحدة فقط! سنحلل أدائك ونربطك بأفضل معلم مناسب لمستواك
-          </p>
-          <button
-            onClick={() => {
-              if (isAuthenticated && user?.role === 'learner') {
-                navigate('/learner/assessment');
-              } else {
-                navigate('/login');
-              }
-            }}
-            className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-bold transition inline-flex items-center gap-2 text-base"
+      {/* Assessment Section - Only for Learners */}
+      {isAuthenticated && user?.role === 'learner' && (
+        <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16 bg-gradient-to-r from-orange-50 to-red-50 rounded-3xl mx-3 md:mx-4 mb-12 md:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center"
           >
-            <Mic className="w-5 h-5" />
-            {isAuthenticated && user?.role === 'learner' ? 'ابدأ الاختبار (اختياري)' : 'سجّل الدخول لبدء الاختبار'}
-            <ArrowRight className="w-5 h-5" />
-          </button>
-          <p className="text-xs md:text-sm text-gray-600 mt-4">
-            يمكنك أيضاً البدء مباشرة بدون اختبار واختيار المعلم يدويًا
-          </p>
-        </motion.div>
-      </section>
+            <div className="flex items-center justify-center mb-4 gap-2">
+              <span className="text-3xl">⚡</span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">اختبر مستواك الآن</h2>
+            </div>
+            <p className="text-sm md:text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+              سجل نفسك في اختبار مدته دقيقة واحدة فقط! سنحلل أدائك ونربطك بأفضل معلم مناسب لمستواك
+            </p>
+            <button
+              onClick={() => navigate('/learner/assessment')}
+              className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-bold transition inline-flex items-center gap-2 text-base"
+            >
+              <Mic className="w-5 h-5" />
+              ابدأ الاختبار (اختياري)
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <p className="text-xs md:text-sm text-gray-600 mt-4">
+              يمكنك أيضاً البدء مباشرة بدون اختبار واختيار المعلم يدويًا
+            </p>
+          </motion.div>
+        </section>
+      )}
       <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 text-gray-900">خدماتنا</h2>
         
