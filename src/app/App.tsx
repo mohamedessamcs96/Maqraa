@@ -39,6 +39,17 @@ import { SessionDetailsPage } from './pages/learner/SessionDetailsPage';
 
 import { TeacherApplyPage } from './pages/teacher/TeacherApplyPage';
 import { TeacherApplicationStatusPage } from './pages/teacher/TeacherApplicationStatusPage';
+import { TeacherDocumentsPage } from './pages/teacher/TeacherDocumentsPage';
+import { useAuthContext } from './context/AuthContext';
+
+function LearnerOnly({ children }: { children: React.ReactNode }) {
+  const { user, isAuthenticated } = useAuthContext();
+
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (user?.role !== 'learner') return <Navigate to="/" replace />;
+
+  return <>{children}</>;
+}
 
 export type Screen = 
   | 'welcome' 
@@ -257,7 +268,14 @@ export default function App() {
             
             {/* Learner Pages */}
             <Route path="/learner/onboarding" element={<LearnerOnboarding />} />
-            <Route path="/learner/assessment" element={<AssessmentFlow />} />
+            <Route
+              path="/learner/assessment"
+              element={
+                <LearnerOnly>
+                  <AssessmentFlow />
+                </LearnerOnly>
+              }
+            />
             <Route path="/learner/zoom-test" element={<ZoomTestPage />} />
             <Route path="/learner/teachers" element={<BrowseTeachers />} />
             <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
@@ -270,6 +288,7 @@ export default function App() {
 
             {/* Teacher Pages (simulated backend) */}
             <Route path="/teacher/apply" element={<TeacherApplyPage />} />
+            <Route path="/teacher/documents" element={<TeacherDocumentsPage />} />
             <Route path="/teacher/application-status" element={<TeacherApplicationStatusPage />} />
             
             {/* Legacy App - redirect to old welcome flow */}

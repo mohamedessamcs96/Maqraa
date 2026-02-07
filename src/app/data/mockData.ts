@@ -60,7 +60,7 @@ export const mockTeachers: Teacher[] = [
     email: 'noor@example.com',
     phone: '+966504234567',
     bio: 'معلمة متخصصة في تصحيح التلاوة والتجويد',
-    photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+    photoUrl: '/avatars/teacher-female-niqab.svg',
     rating: 4.9,
     reviewCount: 203,
     services: [

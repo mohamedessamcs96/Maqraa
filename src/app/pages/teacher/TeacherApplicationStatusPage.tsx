@@ -125,7 +125,7 @@ export function TeacherApplicationStatusPage() {
                 ))}
               </ul>
               <button
-                onClick={() => navigate('/teacher/apply')}
+                onClick={() => navigate('/teacher/documents')}
                 className="mt-4 w-full bg-green-700 text-white font-bold py-3 rounded-xl hover:bg-green-800 transition"
               >
                 تحديث المستندات

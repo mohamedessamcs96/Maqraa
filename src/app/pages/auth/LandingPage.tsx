@@ -73,6 +73,14 @@ export function LandingPage({}: LandingPageProps) {
                   </div>
                   <span className="text-xs md:text-sm text-gray-700 hidden sm:inline">{user.name}</span>
                 </div>
+                {user.role === 'teacher' && (
+                  <button
+                    onClick={() => navigate('/teacher/documents')}
+                    className="px-3 md:px-4 py-2 text-sm md:text-base text-[#486837] hover:text-[#3a5029] transition hidden sm:inline"
+                  >
+                    المستندات
+                  </button>
+                )}
                 <button
                   onClick={() => {
                     logout();
@@ -170,11 +178,17 @@ export function LandingPage({}: LandingPageProps) {
             سجل نفسك في اختبار مدته دقيقة واحدة فقط! سنحلل أدائك ونربطك بأفضل معلم مناسب لمستواك
           </p>
           <button
-            onClick={() => navigate('/learner/assessment')}
+            onClick={() => {
+              if (isAuthenticated && user?.role === 'learner') {
+                navigate('/learner/assessment');
+              } else {
+                navigate('/login');
+              }
+            }}
             className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-bold transition inline-flex items-center gap-2 text-base"
           >
             <Mic className="w-5 h-5" />
-            ابدأ الاختبار (اختياري)
+            {isAuthenticated && user?.role === 'learner' ? 'ابدأ الاختبار (اختياري)' : 'سجّل الدخول لبدء الاختبار'}
             <ArrowRight className="w-5 h-5" />
           </button>
           <p className="text-xs md:text-sm text-gray-600 mt-4">

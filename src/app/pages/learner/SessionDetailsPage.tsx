@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, CreditCard, MessageCircle, Video, ExternalLink } from 'lucide-react';
@@ -28,9 +28,11 @@ export function SessionDetailsPage() {
     return mockTeachers.find((t) => t.id === session.teacherId) ?? null;
   }, [session]);
 
-  const messages = useMemo(() => {
-    if (!session) return [] as ChatMessage[];
-    const seeded = mockChatMessages.filter((m) => m.sessionId === session.id);
+  const seededMessages = useMemo((): ChatMessage[] => {
+    if (!session) return [];
+
+    // Ensure the mock data is treated as our strict ChatMessage union type.
+    const seeded = mockChatMessages.filter((m) => m.sessionId === session.id) as ChatMessage[];
 
     // If this is a freshly paid session (created via our checkout), add the zoom link as a system message.
     if (session.status === 'paid' && session.zoomLink) {
@@ -54,6 +56,10 @@ export function SessionDetailsPage() {
     return seeded;
   }, [session]);
 
+  const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
+
+  const messages = useMemo(() => [...localMessages, ...seededMessages], [localMessages, seededMessages]);
+
   const handleSend = (text: string) => {
     if (!session) return;
     const m: ChatMessage = {
@@ -68,7 +74,7 @@ export function SessionDetailsPage() {
 
     // For now we keep chat messages demo-only (not persisted).
     // If you want persistence, we can add storage.getChatMessages/saveChatMessages.
-    messages.unshift(m);
+    setLocalMessages((prev) => [m, ...prev]);
   };
 
   if (!session) {
