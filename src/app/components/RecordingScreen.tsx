@@ -57,20 +57,20 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
   return (
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header */}
-      <div className="px-6 py-4" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
+      <div className="px-4 sm:px-6 py-4" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
         <div className="flex items-center gap-4">
           <button onClick={onBack} className="p-2 hover:bg-white/10 rounded-full transition-colors">
             <ArrowRight className="w-6 h-6" />
           </button>
           <div>
-            <h1 className="text-xl font-bold" style={{ color: '#ffffff' }}>تقييم مستوى التلاوة</h1>
+            <h1 className="text-lg sm:text-xl font-bold" style={{ color: '#ffffff' }}>تقييم مستوى التلاوة</h1>
             <p className="text-sm" style={{ color: '#d1fae5' }}>منصة مقرأة • نورٌ يُتلى</p>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-white">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 bg-white">
         {state === 'ready' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -85,7 +85,7 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
               <p className="text-gray-600">اضغط على الزر أدناه وابدأ بتلاوة أي سورة تحفظها</p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-8 max-w-sm mx-auto">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 sm:p-6 mb-7 sm:mb-8 max-w-sm mx-auto">
               <h3 className="font-bold text-gray-800 mb-3">نصائح للحصول على أفضل تقييم:</h3>
               <ul className="text-gray-700 text-sm space-y-2 text-right">
                 <li className="flex items-start gap-2">
@@ -129,9 +129,9 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
               <motion.div
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-40 h-40 bg-gradient-to-br from-red-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 relative"
+                className="w-32 h-32 sm:w-40 sm:h-40 bg-gradient-to-br from-red-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 relative"
               >
-                <Mic className="w-20 h-20 text-white" />
+                <Mic className="w-16 h-16 sm:w-20 sm:h-20 text-white" />
                 <motion.div
                   className="absolute inset-0 rounded-full border-4 border-red-400"
                   animate={{ scale: [1, 1.3, 1], opacity: [0.7, 0, 0.7] }}
@@ -139,7 +139,7 @@ export function RecordingScreen({ onComplete, onBack }: RecordingScreenProps) {
                 />
               </motion.div>
               
-              <div className="text-6xl font-bold text-gray-800 mb-2">{formatTime(timeLeft)}</div>
+              <div className="text-5xl sm:text-6xl font-bold text-gray-800 mb-2">{formatTime(timeLeft)}</div>
               <p className="text-gray-600">جاري التسجيل...</p>
             </div>
 

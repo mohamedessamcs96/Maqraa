@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WelcomeScreen } from '../../components/WelcomeScreen';
 import { RecordingScreen } from '../../components/RecordingScreen';
 import { LevelResultScreen } from '../../components/LevelResultScreen';
+import { AssessmentIntroScreen } from './AssessmentIntroScreen';
 
 type AssessmentScreen = 'welcome' | 'recording' | 'result';
 
@@ -13,6 +13,10 @@ export function AssessmentFlow() {
 
   const handleStartTest = () => {
     setCurrentScreen('recording');
+  };
+
+  const handleSkip = () => {
+    navigate('/learner/teachers');
   };
 
   const handleTestComplete = () => {
@@ -42,7 +46,7 @@ export function AssessmentFlow() {
   return (
     <div className="min-h-screen" dir="rtl">
       {currentScreen === 'welcome' && (
-        <WelcomeScreen onStartTest={handleStartTest} />
+        <AssessmentIntroScreen onStart={handleStartTest} onSkip={handleSkip} />
       )}
       {currentScreen === 'recording' && (
         <RecordingScreen onComplete={handleTestComplete} onBack={handleBack} />

@@ -73,7 +73,7 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
   return (
     <div className="min-h-screen flex flex-col bg-white" dir="rtl">
       {/* Header with gradient */}
-      <div className="px-6 py-12 relative overflow-hidden" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
+      <div className="px-4 sm:px-6 py-10 sm:py-12 relative overflow-hidden" style={{ backgroundColor: '#059669', color: '#ffffff' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
       </div>
 
       {/* Main content */}
-      <div className="flex-1 -mt-6 bg-white rounded-t-3xl px-6 py-8 overflow-y-auto">
+  <div className="flex-1 -mt-6 bg-white rounded-t-3xl px-4 sm:px-6 py-6 sm:py-8 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export function LevelResultScreen({ level, onViewTutors }: LevelResultScreenProp
               <span className="text-gray-600 text-sm">مستواك</span>
               <Sparkles className="w-5 h-5 text-amber-500" />
             </div>
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">{level}</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">{level}</h2>
             <p className="text-gray-600">{levelInfo.description}</p>
           </div>
 
