@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { AuthProvider } from './context/AuthContext';
 import { MobileAppContainer } from './components/MobileAppContainer';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { RecordingScreen } from './components/RecordingScreen';
@@ -236,28 +237,30 @@ function TeacherProfileWrapper() {
 // Main App Component with Routing
 export default function App() {
   return (
-    <MobileAppContainer>
-      <Router>
-        <Routes>
-          {/* Platform Pages */}
-          <Route path="/" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
-          <Route path="/landing" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
-          <Route path="/login" element={<LoginPage onNavigate={(path) => window.location.href = path} />} />
-          <Route path="/signup" element={<SignUpPage onNavigate={(path) => window.location.href = path} />} />
-          
-          {/* Learner Pages */}
-          <Route path="/learner/onboarding" element={<LearnerOnboarding onNavigate={(path) => window.location.href = path} />} />
-          <Route path="/learner/teachers" element={<BrowseTeachers onNavigate={(path) => window.location.href = path} />} />
-          <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
-          <Route path="/learner/dashboard" element={<LearnerDashboard onNavigate={(path) => window.location.href = path} />} />
-          
-          {/* Legacy App - redirect to old welcome flow */}
-          <Route path="/app" element={<LegacyApp />} />
-          
-          {/* Default redirect */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </MobileAppContainer>
+    <AuthProvider>
+      <MobileAppContainer>
+        <Router>
+          <Routes>
+            {/* Platform Pages */}
+            <Route path="/" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/landing" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/login" element={<LoginPage onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/signup" element={<SignUpPage onNavigate={(path) => window.location.href = path} />} />
+            
+            {/* Learner Pages */}
+            <Route path="/learner/onboarding" element={<LearnerOnboarding onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/learner/teachers" element={<BrowseTeachers onNavigate={(path) => window.location.href = path} />} />
+            <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
+            <Route path="/learner/dashboard" element={<LearnerDashboard onNavigate={(path) => window.location.href = path} />} />
+            
+            {/* Legacy App - redirect to old welcome flow */}
+            <Route path="/app" element={<LegacyApp />} />
+            
+            {/* Default redirect */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </MobileAppContainer>
+    </AuthProvider>
   );
 }

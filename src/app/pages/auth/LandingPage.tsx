@@ -1,12 +1,16 @@
 import { motion } from 'motion/react';
-import { BookOpen, Users, Award, ArrowRight, Star, CheckCircle, Mic, GraduationCap, Users2, Zap } from 'lucide-react';
+import { BookOpen, Users, Award, ArrowRight, Star, CheckCircle, Mic, GraduationCap, Users2, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
 interface LandingPageProps {
   onNavigate: (path: string) => void;
 }
 
 export function LandingPage({ onNavigate }: LandingPageProps) {
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuthContext();
   const [email, setEmail] = useState('');
   const [selectedServiceIndex, setSelectedServiceIndex] = useState(0);
 
@@ -63,18 +67,42 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             <span className="text-lg md:text-2xl font-bold text-[#486837]">مقرأة</span>
           </motion.div>
           <div className="flex gap-2 md:gap-4">
-            <button
-              onClick={() => onNavigate('/login')}
-              className="px-3 md:px-4 py-2 text-sm md:text-base text-gray-700 hover:text-gray-900 transition"
-            >
-              دخول
-            </button>
-            <button
-              onClick={() => onNavigate('/signup')}
-              className="px-4 md:px-6 py-2 text-sm md:text-base bg-[#486837] text-white rounded-lg hover:bg-[#3a5029] transition"
-            >
-              إنشاء حساب
-            </button>
+            {isAuthenticated && user ? (
+              <>
+                <div className="flex items-center gap-2 px-3 md:px-4 py-2">
+                  <div className="w-8 h-8 rounded-full bg-[#486837] flex items-center justify-center">
+                    <span className="text-white text-sm font-bold">{user.name[0]}</span>
+                  </div>
+                  <span className="text-xs md:text-sm text-gray-700 hidden sm:inline">{user.name}</span>
+                </div>
+                <button
+                  onClick={() => {
+                    logout();
+                    navigate('/');
+                  }}
+                  className="px-3 md:px-4 py-2 text-sm md:text-base text-red-600 hover:text-red-700 transition flex items-center gap-1"
+                  title="تسجيل الخروج"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">خروج</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="px-3 md:px-4 py-2 text-sm md:text-base text-gray-700 hover:text-gray-900 transition"
+                >
+                  دخول
+                </button>
+                <button
+                  onClick={() => navigate('/signup')}
+                  className="px-4 md:px-6 py-2 text-sm md:text-base bg-[#486837] text-white rounded-lg hover:bg-[#3a5029] transition"
+                >
+                  إنشاء حساب
+                </button>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -137,7 +165,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           className="text-center"
         >
           <div className="flex items-center justify-center mb-4 gap-2">
-            <Zap className="w-6 h-6 text-orange-600" />
+            <span className="text-3xl">⚡</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">اختبر مستواك الآن</h2>
           </div>
           <p className="text-sm md:text-lg text-gray-700 mb-6 max-w-2xl mx-auto">

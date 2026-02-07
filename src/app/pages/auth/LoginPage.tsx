@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Mail, Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../context/AuthContext';
 
 interface LoginPageProps {
   onNavigate: (path: string) => void;
 }
 
 export function LoginPage({ onNavigate }: LoginPageProps) {
-  const { login, isLoading } = useAuth();
+  const navigate = useNavigate();
+  const { login, isLoading } = useAuthContext();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -41,7 +43,7 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
     try {
       await login(formData.email, formData.password);
 
-      // Simulate role detection
+      // Determine redirect path based on email
       let redirectPath = '/learner/dashboard';
       if (formData.email.includes('teacher')) {
         redirectPath = '/teacher/dashboard';
@@ -49,7 +51,8 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
         redirectPath = '/admin/dashboard';
       }
 
-      setTimeout(() => onNavigate(redirectPath), 500);
+      // Use React Router navigate instead of window.location
+      setTimeout(() => navigate(redirectPath), 500);
     } catch (error) {
       setErrors({ submit: 'البريد أو كلمة المرور غير صحيحة' });
     } finally {
@@ -113,7 +116,7 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
               <label className="text-sm font-bold text-gray-700">كلمة المرور</label>
               <button
                 type="button"
-                onClick={() => onNavigate('/forgot-password')}
+                onClick={() => navigate('/forgot-password')}
                 className="text-sm text-green-700 hover:underline"
               >
                 نسيت كلمة المرور؟
@@ -170,7 +173,7 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
         <p className="text-center mt-6 text-gray-600">
           ليس لديك حساب؟{' '}
           <button
-            onClick={() => onNavigate('/signup')}
+            onClick={() => navigate('/signup')}
             className="text-green-700 font-bold hover:underline"
           >
             إنشاء حساب جديد
@@ -180,7 +183,7 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
         {/* Or continue as guest */}
         <div className="mt-6 pt-6 border-t border-gray-200">
           <button
-            onClick={() => onNavigate('/learner/teachers')}
+            onClick={() => navigate('/learner/teachers')}
             className="w-full py-2 text-gray-700 font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 transition"
           >
             المتابعة كزائر
