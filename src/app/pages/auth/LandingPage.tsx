@@ -44,16 +44,21 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-green-50" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-[#486837]/5 via-white to-white" dir="rtl">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-amber-200">
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-[#ad9f4e]/20">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold text-emerald-700"
+            className="flex items-center gap-3"
           >
-            🕌 مقرأة
+            <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg border-4 border-white">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#ad9f4e] to-[#486837] flex items-center justify-center">
+                <span className="text-2xl">🕌</span>
+              </div>
+            </div>
+            <span className="text-2xl font-bold text-[#486837]">مقرأة</span>
           </motion.div>
           <div className="flex gap-4">
             <button
@@ -64,7 +69,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             </button>
             <button
               onClick={() => onNavigate('/signup')}
-              className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
+              className="px-6 py-2 bg-[#486837] text-white rounded-lg hover:bg-[#3a5029] transition"
             >
               إنشاء حساب
             </button>
@@ -80,7 +85,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            تعلم القرآن من <span className="text-green-700">معلمين معتمدين</span>
+            تعلم القرآن من <span className="text-[#486837]">معلمين معتمدين</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             منصة تعليمية متخصصة تربط المتعلمين مع معلمي القرآن الموثوقين للحصول على تعليم عالي الجودة
@@ -88,14 +93,14 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <button
               onClick={() => onNavigate('/signup?role=learner')}
-              className="px-8 py-4 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transition flex items-center justify-center gap-2"
+              className="px-8 py-4 bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition flex items-center justify-center gap-2"
             >
               ابدأ كمتعلم
               <ArrowRight className="w-5 h-5" />
             </button>
             <button
               onClick={() => onNavigate('/signup?role=teacher')}
-              className="px-8 py-4 border-2 border-green-700 text-green-700 rounded-lg font-bold hover:bg-green-50 transition"
+              className="px-8 py-4 border-2 border-[#486837] text-[#486837] rounded-lg font-bold hover:bg-[#486837]/5 transition"
             >
               تقدم كمعلم
             </button>
@@ -113,7 +118,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
                   transition={{ delay: index * 0.1 }}
                   className="p-4"
                 >
-                  <Icon className="w-8 h-8 text-green-700 mx-auto mb-3" />
+                  <Icon className="w-8 h-8 text-[#486837] mx-auto mb-3" />
                   <p className="font-semibold text-gray-800">{feature.label}</p>
                 </motion.div>
               );
@@ -138,7 +143,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
                 whileTap={{ scale: 0.95 }}
                 className={`p-6 rounded-2xl transition-all duration-300 flex flex-col items-center gap-3 ${
                   selectedServiceIndex === index
-                    ? 'bg-green-700 text-white shadow-lg'
+                    ? 'bg-[#486837] text-white shadow-lg'
                     : 'bg-white text-gray-900 shadow-md hover:shadow-lg border-2 border-gray-100'
                 }`}
               >
@@ -155,13 +160,13 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-12 text-center"
+          className="bg-gradient-to-br from-[#486837]/5 to-[#ad9f4e]/10 rounded-3xl p-12 text-center"
         >
           {(() => {
             const Icon = services[selectedServiceIndex].icon;
             return (
               <>
-                <Icon className="w-20 h-20 text-green-700 mx-auto mb-6" />
+                <Icon className="w-20 h-20 text-[#486837] mx-auto mb-6" />
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">
                   {services[selectedServiceIndex].title}
                 </h3>
@@ -170,7 +175,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
                 </p>
                 <button
                   onClick={() => onNavigate('/signup?role=learner')}
-                  className="px-8 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transition inline-flex items-center gap-2"
+                  className="px-8 py-3 bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition inline-flex items-center gap-2"
                 >
                   ابدأ الآن
                   <ArrowRight className="w-5 h-5" />
@@ -197,7 +202,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition text-center"
             >
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-green-600 mx-auto mb-4" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-600 to-green-800 mx-auto mb-4" />
               <h3 className="font-bold text-lg mb-2">{teacher.name}</h3>
               <p className="text-gray-600 text-sm mb-4">{teacher.specialization}</p>
               <div className="flex items-center justify-center gap-2">
@@ -210,7 +215,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="text-center">
           <button
             onClick={() => onNavigate('/learner/teachers')}
-            className="px-6 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transition"
+            className="px-6 py-3 bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition"
           >
             عرض جميع المعلمين
           </button>
@@ -222,7 +227,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-green-700 to-emerald-700 rounded-3xl p-12 text-white text-center"
+          className="bg-gradient-to-r from-[#486837] to-[#3a5029] rounded-3xl p-12 text-white text-center"
         >
           <h2 className="text-4xl font-bold mb-6">ابدأ رحلتك القرآنية اليوم</h2>
           <p className="text-lg mb-8 opacity-90">
@@ -231,7 +236,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => onNavigate('/signup?role=learner')}
-              className="px-8 py-4 bg-white text-green-700 rounded-lg font-bold hover:bg-gray-100 transition"
+              className="px-8 py-4 bg-white text-[#486837] rounded-lg font-bold hover:bg-gray-100 transition"
             >
               إنشاء حساب متعلم
             </button>

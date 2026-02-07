@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { RecordingScreen } from './components/RecordingScreen';
@@ -17,6 +18,15 @@ import { MemorizationPlan } from './components/memorization/MemorizationPlan';
 import { MemorizationTracker } from './components/memorization/MemorizationTracker';
 import { IjazahPrograms } from './components/ijazah/IjazahPrograms';
 import { IjazahProgress } from './components/ijazah/IjazahProgress';
+
+// Platform Pages
+import { LandingPage } from './pages/auth/LandingPage';
+import { LoginPage } from './pages/auth/LoginPage';
+import { SignUpPage } from './pages/auth/SignUpPage';
+import { LearnerOnboarding } from './pages/learner/LearnerOnboarding';
+import { BrowseTeachers } from './pages/learner/BrowseTeachers';
+import { TeacherProfile } from './pages/learner/TeacherProfile';
+import { LearnerDashboard } from './pages/learner/LearnerDashboard';
 
 export type Screen = 
   | 'welcome' 
@@ -51,7 +61,8 @@ export interface Tutor {
   bio: string;
 }
 
-export default function App() {
+// Legacy App Component for old screens
+function LegacyApp() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
   const [userLevel, setUserLevel] = useState<string>('');
   const [selectedTutor, setSelectedTutor] = useState<Tutor | null>(null);
@@ -208,5 +219,42 @@ export default function App() {
         )}
       </div>
     </div>
+  );
+}
+
+// Wrapper component for TeacherProfile with route params
+function TeacherProfileWrapper() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = (path: string) => {
+    window.location.href = path;
+  };
+  
+  return <TeacherProfile teacherId={id || '1'} onNavigate={navigate} />;
+}
+
+// Main App Component with Routing
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Platform Pages */}
+        <Route path="/" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
+        <Route path="/landing" element={<LandingPage onNavigate={(path) => window.location.href = path} />} />
+        <Route path="/login" element={<LoginPage onNavigate={(path) => window.location.href = path} />} />
+        <Route path="/signup" element={<SignUpPage onNavigate={(path) => window.location.href = path} />} />
+        
+        {/* Learner Pages */}
+        <Route path="/learner/onboarding" element={<LearnerOnboarding onNavigate={(path) => window.location.href = path} />} />
+        <Route path="/learner/teachers" element={<BrowseTeachers onNavigate={(path) => window.location.href = path} />} />
+        <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
+        <Route path="/learner/dashboard" element={<LearnerDashboard onNavigate={(path) => window.location.href = path} />} />
+        
+        {/* Legacy App - redirect to old welcome flow */}
+        <Route path="/app" element={<LegacyApp />} />
+        
+        {/* Default redirect */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
