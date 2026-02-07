@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'rea
 import { useState } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { MobileAppContainer } from './components/MobileAppContainer';
+import { ensureSeeded } from './lib/seed';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { RecordingScreen } from './components/RecordingScreen';
 import { LevelResultScreen } from './components/LevelResultScreen';
@@ -30,6 +31,14 @@ import { BrowseTeachers } from './pages/learner/BrowseTeachers';
 import { TeacherProfile } from './pages/learner/TeacherProfile';
 import { LearnerDashboard } from './pages/learner/LearnerDashboard';
 import { AssessmentFlow } from './pages/learner/AssessmentFlow';
+import { ZoomTestPage } from './pages/learner/ZoomTestPage';
+import { BookSessionPage } from './pages/learner/BookSessionPage';
+import { CheckoutPage } from './pages/learner/CheckoutPage';
+import { SessionsListPage } from './pages/learner/SessionsListPage';
+import { SessionDetailsPage } from './pages/learner/SessionDetailsPage';
+
+import { TeacherApplyPage } from './pages/teacher/TeacherApplyPage';
+import { TeacherApplicationStatusPage } from './pages/teacher/TeacherApplicationStatusPage';
 
 export type Screen = 
   | 'welcome' 
@@ -234,6 +243,7 @@ function TeacherProfileWrapper() {
 
 // Main App Component with Routing
 export default function App() {
+  ensureSeeded();
   return (
     <AuthProvider>
       <MobileAppContainer>
@@ -248,9 +258,19 @@ export default function App() {
             {/* Learner Pages */}
             <Route path="/learner/onboarding" element={<LearnerOnboarding />} />
             <Route path="/learner/assessment" element={<AssessmentFlow />} />
+            <Route path="/learner/zoom-test" element={<ZoomTestPage />} />
             <Route path="/learner/teachers" element={<BrowseTeachers />} />
             <Route path="/learner/teacher/:id" element={<TeacherProfileWrapper />} />
             <Route path="/learner/dashboard" element={<LearnerDashboard />} />
+
+            <Route path="/learner/book/:teacherId" element={<BookSessionPage />} />
+            <Route path="/learner/checkout/:sessionId" element={<CheckoutPage />} />
+            <Route path="/learner/sessions" element={<SessionsListPage />} />
+            <Route path="/learner/sessions/:sessionId" element={<SessionDetailsPage />} />
+
+            {/* Teacher Pages (simulated backend) */}
+            <Route path="/teacher/apply" element={<TeacherApplyPage />} />
+            <Route path="/teacher/application-status" element={<TeacherApplicationStatusPage />} />
             
             {/* Legacy App - redirect to old welcome flow */}
             <Route path="/app" element={<LegacyApp />} />

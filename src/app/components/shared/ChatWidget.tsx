@@ -42,7 +42,7 @@ export function ChatWidget({
         onClick={onToggle}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-700 text-white shadow-lg flex items-center justify-center z-40 hover:bg-green-800 transition"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-14 h-14 rounded-full bg-green-700 text-white shadow-lg flex items-center justify-center z-40 hover:bg-green-800 transition"
       >
         <MessageCircle className="w-6 h-6" />
       </motion.button>
@@ -53,7 +53,7 @@ export function ChatWidget({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col h-[500px] max-w-md w-full"
+      className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col w-full max-w-md h-[min(500px,calc(100dvh-2rem))] sm:h-[500px]"
       dir="rtl"
     >
       {/* Header */}
@@ -103,7 +103,7 @@ export function ChatWidget({
                   {msg.senderId !== 'system' && (
                     <p className="font-bold text-green-700 text-xs mb-1">{msg.senderName}</p>
                   )}
-                  <p>{msg.message}</p>
+                  <p className="break-words">{msg.message}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {new Date(msg.timestamp).toLocaleTimeString('ar-SA', {
                       hour: '2-digit',
@@ -124,7 +124,12 @@ export function ChatWidget({
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
           className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:border-green-700 focus:outline-none text-sm"
           placeholder="أكتب رسالتك..."
         />

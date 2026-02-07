@@ -111,7 +111,7 @@ export function LearnerOnboarding({}: LearnerOnboardingProps) {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl p-12 shadow-xl max-w-md w-full text-center"
+          className="bg-white rounded-2xl p-6 sm:p-12 shadow-xl max-w-md w-full text-center"
         >
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-green-700" />
@@ -131,12 +131,12 @@ export function LearnerOnboarding({}: LearnerOnboardingProps) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full"
+        className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 max-w-2xl w-full"
       >
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-gray-900">{currentStep.title}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{currentStep.title}</h1>
             <span className="text-sm font-bold text-gray-600">
               {step + 1} / {steps_data.length}
             </span>
@@ -153,7 +153,7 @@ export function LearnerOnboarding({}: LearnerOnboardingProps) {
 
         {/* Step Content */}
         <div className="mb-8">
-          <p className="text-gray-600 mb-6">{currentStep.description}</p>
+          <p className="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base">{currentStep.description}</p>
 
           <div className="space-y-3">
             {currentStep.type === 'checkbox'

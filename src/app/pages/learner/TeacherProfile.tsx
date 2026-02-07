@@ -120,7 +120,7 @@ export function TeacherProfile({ teacherId }: TeacherProfileProps) {
               </div>
 
               {/* Contact Button */}
-              <button className="h-12 px-6 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition flex items-center gap-2 whitespace-nowrap">
+              <button className="h-12 w-full md:w-auto px-6 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition flex items-center justify-center gap-2 whitespace-nowrap">
                 <MessageCircle className="w-5 h-5" />
                 تواصل
               </button>
@@ -168,7 +168,7 @@ export function TeacherProfile({ teacherId }: TeacherProfileProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-lg p-8 h-fit sticky top-20"
+            className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 h-fit lg:sticky lg:top-20"
           >
             <h3 className="text-xl font-bold text-gray-900 mb-6">احجز جلسة</h3>
 
