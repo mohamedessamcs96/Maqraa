@@ -27,8 +27,16 @@ export function BookSessionPage() {
   const teacher = useMemo(() => mockTeachers.find((t) => t.id === teacherId), [teacherId]);
 
   const serviceId = searchParams.get('service') ?? '';
-  const date = searchParams.get('date') ?? '';
-  const time = searchParams.get('time') ?? '';
+  const dateParam = searchParams.get('date') ?? '';
+  const timeParam = searchParams.get('time') ?? '';
+
+  const [selectedSlot, setSelectedSlot] = useState<{ date: string; time: string }>({
+    date: dateParam,
+    time: timeParam,
+  });
+
+  const date = selectedSlot.date;
+  const time = selectedSlot.time;
 
   const service = useMemo(() => teacher?.services.find((s) => s.id === serviceId), [teacher, serviceId]);
 
@@ -40,6 +48,17 @@ export function BookSessionPage() {
   }, [service, duration]);
 
   const canBook = !!user && !!teacher && !!service && !!date && !!time;
+
+  const availableSlots = useMemo(
+    () => [
+      { date: '2026-02-15', time: '18:00' },
+      { date: '2026-02-16', time: '19:00' },
+      { date: '2026-02-17', time: '17:00' },
+      { date: '2026-02-18', time: '20:00' },
+      { date: '2026-02-20', time: '19:30' },
+    ],
+    []
+  );
 
   const handleCreateSession = () => {
     if (!user || !teacher || !service || !date || !time) return;
@@ -114,6 +133,32 @@ export function BookSessionPage() {
                 <p className="text-xs text-gray-600">الوقت</p>
                 <p className="font-bold text-gray-900">{time || '—'}</p>
               </div>
+            </div>
+          </div>
+
+          {/* Slot picker (enables payment) */}
+          <div className="mt-5">
+            <p className="text-sm font-bold text-gray-700 mb-2">اختر موعداً</p>
+            <div className="space-y-2">
+              {availableSlots.map((slot) => {
+                const active = slot.date === selectedSlot.date && slot.time === selectedSlot.time;
+                return (
+                  <button
+                    key={`${slot.date}-${slot.time}`}
+                    onClick={() => setSelectedSlot(slot)}
+                    className={`w-full p-3 rounded-2xl border transition text-right ${
+                      active
+                        ? 'border-green-700 bg-green-50'
+                        : 'border-gray-200 hover:border-green-700 hover:bg-green-50/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">{slot.time}</span>
+                      <span className="font-semibold text-gray-900">{slot.date}</span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 

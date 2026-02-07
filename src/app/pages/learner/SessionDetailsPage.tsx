@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, CreditCard, MessageCircle, Video } from 'lucide-react';
+import { ArrowRight, CreditCard, MessageCircle, Video, ExternalLink } from 'lucide-react';
 import { mockTeachers, mockChatMessages } from '../../data/mockData';
 import { ChatWidget } from '../../components/shared/ChatWidget';
 import { storage } from '../../lib/storage';
@@ -31,6 +31,26 @@ export function SessionDetailsPage() {
   const messages = useMemo(() => {
     if (!session) return [] as ChatMessage[];
     const seeded = mockChatMessages.filter((m) => m.sessionId === session.id);
+
+    // If this is a freshly paid session (created via our checkout), add the zoom link as a system message.
+    if (session.status === 'paid' && session.zoomLink) {
+      const alreadyHasZoom = seeded.some((m) => m.messageType === 'zoom_link');
+      if (!alreadyHasZoom) {
+        return [
+          {
+            id: `sys-zoom-${session.id}`,
+            sessionId: session.id,
+            senderId: 'system',
+            senderName: 'النظام',
+            message: session.zoomLink,
+            messageType: 'zoom_link',
+            timestamp: new Date().toISOString(),
+          },
+          ...seeded,
+        ];
+      }
+    }
+
     return seeded;
   }, [session]);
 
@@ -101,13 +121,24 @@ export function SessionDetailsPage() {
               <a className="text-sm text-emerald-800 break-all underline" href={session.zoomLink} target="_blank" rel="noreferrer">
                 {session.zoomLink}
               </a>
-              <button
-                onClick={() => navigate('/learner/zoom-test')}
-                className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-green-700 text-white font-bold hover:bg-green-800"
-              >
-                <Video className="w-4 h-4" />
-                تجربة Zoom داخل التطبيق
-              </button>
+              <div className="mt-3 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={session.zoomLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-green-700 text-white font-bold hover:bg-green-800"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  الانضمام إلى Zoom
+                </a>
+                <button
+                  onClick={() => navigate('/learner/zoom-test')}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-gray-200 font-bold text-gray-800 hover:bg-gray-50"
+                >
+                  <Video className="w-4 h-4" />
+                  اختبار Zoom داخل التطبيق
+                </button>
+              </div>
             </div>
           )}
 

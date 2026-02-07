@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#065F46"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+
+  <!-- Shoulders / cloak -->
+  <path d="M88 470c30-92 96-150 168-150s138 58 168 150" fill="#111827" opacity="0.95"/>
+
+  <!-- Head / niqab silhouette -->
+  <path d="M256 84c86 0 156 70 156 156 0 34-11 66-30 92-10 14-21 28-33 38-25 22-57 34-93 34s-68-12-93-34c-12-10-23-24-33-38-19-26-30-58-30-92 0-86 70-156 156-156z" fill="#0B0F17"/>
+
+  <!-- Face opening -->
+  <path d="M150 245c-2-34 8-62 27-83 18-20 44-31 79-31h0c35 0 61 11 79 31 19 21 29 49 27 83-1 15-6 29-14 40-13 18-34 29-62 29h-60c-28 0-49-11-62-29-8-11-13-25-14-40z" fill="#111827" opacity="0.85"/>
+
+  <!-- Eyes -->
+  <ellipse cx="214" cy="244" rx="18" ry="10" fill="#E5E7EB" opacity="0.95"/>
+  <ellipse cx="298" cy="244" rx="18" ry="10" fill="#E5E7EB" opacity="0.95"/>
+  <circle cx="214" cy="244" r="6" fill="#0B0F17"/>
+  <circle cx="298" cy="244" r="6" fill="#0B0F17"/>
+
+  <!-- Subtle highlight -->
+  <path d="M168 192c22-34 52-51 88-51s66 17 88 51" stroke="#374151" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+</svg>

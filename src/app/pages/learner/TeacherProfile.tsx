@@ -201,14 +201,10 @@ export function TeacherProfile({ teacherId }: TeacherProfileProps) {
                 </div>
 
                 <button
-                  onClick={() =>
-                    navigate(
-                      `/learner/book/${teacherId}?service=${selectedService.id}`
-                    )
-                  }
+                  onClick={() => navigate(`/learner/book/${teacherId}?service=${selectedService.id}`)}
                   className="w-full py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition"
                 >
-                  المتابعة لحجز جلسة
+                  اختر موعد الحجز
                 </button>
               </>
             )}

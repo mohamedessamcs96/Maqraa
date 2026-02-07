@@ -25,7 +25,7 @@ export const mockTeachers: Teacher[] = [
     email: 'fatima@example.com',
     phone: '+966502234567',
     bio: 'متخصصة في تعليم الأطفال والنساء بأسلوب تفاعلي وممتع',
-    photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+    photoUrl: '/avatars/teacher-female-niqab.svg',
     rating: 4.8,
     reviewCount: 189,
     services: [
