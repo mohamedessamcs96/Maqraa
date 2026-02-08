@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 interface MobileAppContainerProps {
   children: React.ReactNode;
 }
 
 export function MobileAppContainer({ children }: MobileAppContainerProps) {
+  const location = useLocation();
+
+  // Only show phone frame for legacy app
+  const legacyAppOnly = location.pathname === "/app";
+
+  if (!legacyAppOnly) {
+    // Full web size for all platform pages
+    return <div className="w-full min-h-screen bg-white">{children}</div>;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-2 md:p-4">
       {/* Mobile Phone Frame */}
@@ -22,14 +33,16 @@ export function MobileAppContainer({ children }: MobileAppContainerProps) {
         </div>
 
         {/* Phone Screen */}
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden relative pt-8" style={{
-          aspectRatio: '9/20',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-        }}>
+        <div
+          className="bg-white rounded-3xl shadow-2xl overflow-hidden relative pt-8"
+          style={{
+            aspectRatio: "9/20",
+            boxShadow:
+              "0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+          }}
+        >
           {/* Screen Content */}
-          <div className="h-full overflow-y-auto">
-            {children}
-          </div>
+          <div className="h-full overflow-y-auto">{children}</div>
 
           {/* Phone Bottom Bezel */}
           <div className="absolute bottom-0 left-0 right-0 h-6 bg-black rounded-t-3xl" />
