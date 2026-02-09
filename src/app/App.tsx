@@ -46,6 +46,9 @@ import { SessionDetailsPage } from "./pages/learner/SessionDetailsPage";
 import { TeacherApplyPage } from "./pages/teacher/TeacherApplyPage";
 import { TeacherApplicationStatusPage } from "./pages/teacher/TeacherApplicationStatusPage";
 import { TeacherDocumentsPage } from "./pages/teacher/TeacherDocumentsPage";
+import { TeacherDashboard } from "./pages/teacher/TeacherDashboard";
+import { TeacherProfilePage } from "./pages/teacher/TeacherProfilePage";
+import { TeacherServicesPage } from "./pages/teacher/TeacherServicesPage";
 import { useAuthContext } from "./context/AuthContext";
 
 function LearnerOnly({ children }: { children: React.ReactNode }) {
@@ -332,6 +335,9 @@ export default function App() {
 
             {/* Teacher Pages (simulated backend) */}
             <Route path="/teacher/apply" element={<TeacherApplyPage />} />
+            <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+            <Route path="/teacher/profile" element={<TeacherProfilePage />} />
+            <Route path="/teacher/services" element={<TeacherServicesPage />} />
             <Route
               path="/teacher/documents"
               element={<TeacherDocumentsPage />}
