@@ -48,6 +48,7 @@ import { TeacherApplicationStatusPage } from "./pages/teacher/TeacherApplication
 import { TeacherDocumentsPage } from "./pages/teacher/TeacherDocumentsPage";
 import { TeacherDashboard } from "./pages/teacher/TeacherDashboard";
 import { TeacherProfilePage } from "./pages/teacher/TeacherProfilePage";
+import { TeacherProfileSetupPage } from "./pages/teacher/TeacherProfileSetupPage";
 import { TeacherServicesPage } from "./pages/teacher/TeacherServicesPage";
 import { useAuthContext } from "./context/AuthContext";
 
@@ -334,6 +335,10 @@ export default function App() {
             />
 
             {/* Teacher Pages (simulated backend) */}
+            <Route
+              path="/teacher/profile-setup"
+              element={<TeacherProfileSetupPage />}
+            />
             <Route path="/teacher/apply" element={<TeacherApplyPage />} />
             <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
             <Route path="/teacher/profile" element={<TeacherProfilePage />} />

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import { storage } from "../../lib/storage";
 import {
   mockSessions,
   mockPayouts,
@@ -13,11 +14,19 @@ import {
   CheckCircle,
   Clock,
   User,
+  AlertCircle,
 } from "lucide-react";
 
 export function TeacherDashboard() {
   const { user, logout } = useAuthContext();
   const navigate = useNavigate();
+
+  const profileSetup = useMemo(() => {
+    if (!user) return null;
+    const setups = storage.getTeacherProfileSetups?.();
+    if (!setups) return null;
+    return setups.find((s) => s.teacherId === user.id) ?? null;
+  }, [user]);
 
   const teacherEmailMap: Record<string, string> = {
     "teacher@example.com": "teacher-1",
@@ -116,6 +125,30 @@ export function TeacherDashboard() {
             </button>
           </div>
         </div>
+
+        {/* Profile Setup Alert */}
+        {!profileSetup && (
+          <div className="mb-6 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-lg flex items-start justify-between">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-amber-900">
+                  أكمل بيانات ملفك الشخصي
+                </h3>
+                <p className="text-sm text-amber-800 mt-1">
+                  لكي تتمكن من رفع الوثائق والتقديم، عليك إكمال بيانات ملفك
+                  الشخصي أولاً.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => navigate("/teacher/profile-setup")}
+              className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-medium whitespace-nowrap ms-4"
+            >
+              أكمل الآن
+            </button>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 bg-white rounded-2xl shadow p-6">

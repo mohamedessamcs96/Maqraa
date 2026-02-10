@@ -1,21 +1,27 @@
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { ArrowRight, Upload, CheckCircle, AlertCircle, FileText } from 'lucide-react';
-import { useAuthContext } from '../../context/AuthContext';
-import type { TeacherApplication } from '../../types';
-import { storage } from '../../lib/storage';
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
+import {
+  ArrowRight,
+  Upload,
+  CheckCircle,
+  AlertCircle,
+  FileText,
+} from "lucide-react";
+import { useAuthContext } from "../../context/AuthContext";
+import type { TeacherApplication } from "../../types";
+import { storage } from "../../lib/storage";
 
-type DocKey = keyof TeacherApplication['documents'];
+type DocKey = keyof TeacherApplication["documents"];
 
 const docLabels: Record<DocKey, string> = {
-  memorization_cert: 'شهادة حفظ القرآن',
-  ijazah: 'إجازة / تصريح تعليم (إن وجد)',
-  personal_id: 'الهوية الشخصية',
+  memorization_cert: "شهادة حفظ القرآن",
+  ijazah: "إجازة / تصريح تعليم (إن وجد)",
+  personal_id: "الهوية الشخصية",
 };
 
 function makeFakeUploadUrl(filename: string) {
-  const safe = filename.trim() || 'document.pdf';
+  const safe = filename.trim() || "document.pdf";
   return `local://uploads/${Date.now()}-${safe}`;
 }
 
@@ -23,25 +29,35 @@ export function TeacherApplyPage() {
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
-  const [fullName, setFullName] = useState(user?.name ?? '');
-  const [email, setEmail] = useState(user?.email ?? '');
-  const [phone, setPhone] = useState(user?.phone ?? '');
-  const [bio, setBio] = useState(user?.bio ?? '');
+  const [fullName, setFullName] = useState(user?.name ?? "");
+  const [email, setEmail] = useState(user?.email ?? "");
+  const [phone, setPhone] = useState(user?.phone ?? "");
+  const [bio, setBio] = useState(user?.bio ?? "");
 
-  const [docs, setDocs] = useState<TeacherApplication['documents']>({
-    memorization_cert: '',
-    ijazah: '',
-    personal_id: '',
+  const [docs, setDocs] = useState<TeacherApplication["documents"]>({
+    memorization_cert: "",
+    ijazah: "",
+    personal_id: "",
   });
 
   const [submitting, setSubmitting] = useState(false);
 
   const existingApp = useMemo(() => {
     if (!user) return null;
-    return storage.getTeacherApplications().find((a) => a.teacherId === user.id) ?? null;
+    return (
+      storage.getTeacherApplications().find((a) => a.teacherId === user.id) ??
+      null
+    );
   }, [user]);
 
-  const isTeacher = user?.role === 'teacher';
+  const profileSetup = useMemo(() => {
+    if (!user) return null;
+    const setups = storage.getTeacherProfileSetups?.();
+    if (!setups) return null;
+    return setups.find((s) => s.teacherId === user.id) ?? null;
+  }, [user]);
+
+  const isTeacher = user?.role === "teacher";
 
   const missingDocs = useMemo(() => {
     const missing: DocKey[] = [];
@@ -51,7 +67,13 @@ export function TeacherApplyPage() {
     return missing;
   }, [docs]);
 
-  const canSubmit = isTeacher && fullName.trim() && email.trim() && phone.trim() && bio.trim() && missingDocs.length === 0;
+  const canSubmit =
+    isTeacher &&
+    fullName.trim() &&
+    email.trim() &&
+    phone.trim() &&
+    bio.trim() &&
+    missingDocs.length === 0;
 
   const handleUpload = (key: DocKey, file?: File | null) => {
     const filename = file?.name ?? `${key}.pdf`;
@@ -74,14 +96,14 @@ export function TeacherApplyPage() {
         phone: phone.trim(),
         bio: bio.trim(),
         documents: docs,
-        status: 'pending',
+        status: "pending",
         appliedAt: now,
       };
 
       const withoutMine = apps.filter((a) => a.teacherId !== user.id);
       storage.saveTeacherApplications([newApp, ...withoutMine]);
 
-      navigate('/teacher/application-status');
+      navigate("/teacher/application-status");
     } finally {
       setSubmitting(false);
     }
@@ -89,12 +111,15 @@ export function TeacherApplyPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4" dir="rtl">
+      <div
+        className="min-h-screen bg-gray-50 flex items-center justify-center p-4"
+        dir="rtl"
+      >
         <div className="bg-white rounded-2xl shadow-lg p-6 max-w-md w-full text-center">
           <AlertCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
           <p className="font-bold text-gray-900">تحتاج لتسجيل الدخول أولاً</p>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate("/login")}
             className="mt-4 w-full bg-green-700 text-white font-bold py-3 rounded-xl hover:bg-green-800 transition"
           >
             تسجيل الدخول
@@ -108,7 +133,10 @@ export function TeacherApplyPage() {
     return (
       <div className="min-h-screen bg-gray-50" dir="rtl">
         <div className="bg-green-700 text-white p-4 sticky top-0 z-10">
-          <button onClick={() => navigate(-1)} className="flex items-center gap-2 hover:opacity-90">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 hover:opacity-90"
+          >
             <ArrowRight className="w-5 h-5" />
             رجوع
           </button>
@@ -116,8 +144,12 @@ export function TeacherApplyPage() {
         <div className="max-w-md mx-auto p-4">
           <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
             <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-3" />
-            <p className="font-bold text-gray-900">هذه الصفحة مخصصة لحسابات المعلمين</p>
-            <p className="text-sm text-gray-600 mt-2">قم بإنشاء حساب بدور "Teacher" لاستخدام نموذج التقديم.</p>
+            <p className="font-bold text-gray-900">
+              هذه الصفحة مخصصة لحسابات المعلمين
+            </p>
+            <p className="text-sm text-gray-600 mt-2">
+              قم بإنشاء حساب بدور "Teacher" لاستخدام نموذج التقديم.
+            </p>
           </div>
         </div>
       </div>
@@ -128,7 +160,10 @@ export function TeacherApplyPage() {
     return (
       <div className="min-h-screen bg-gray-50" dir="rtl">
         <div className="bg-green-700 text-white p-4 sticky top-0 z-10">
-          <button onClick={() => navigate('/teacher/application-status')} className="flex items-center gap-2 hover:opacity-90">
+          <button
+            onClick={() => navigate("/teacher/application-status")}
+            className="flex items-center gap-2 hover:opacity-90"
+          >
             <ArrowRight className="w-5 h-5" />
             حالة الطلب
           </button>
@@ -138,15 +173,54 @@ export function TeacherApplyPage() {
             <div className="flex items-center gap-3">
               <CheckCircle className="w-8 h-8 text-green-600" />
               <div>
-                <p className="font-bold text-gray-900">لديك طلب مُسجّل مسبقاً</p>
-                <p className="text-sm text-gray-600">يمكنك متابعة حالته أو تعديل المستندات إذا طُلِبت.</p>
+                <p className="font-bold text-gray-900">
+                  لديك طلب مُسجّل مسبقاً
+                </p>
+                <p className="text-sm text-gray-600">
+                  يمكنك متابعة حالته أو تعديل المستندات إذا طُلِبت.
+                </p>
               </div>
             </div>
             <button
-              onClick={() => navigate('/teacher/application-status')}
+              onClick={() => navigate("/teacher/application-status")}
               className="mt-5 w-full bg-green-700 text-white font-bold py-3 rounded-xl hover:bg-green-800 transition"
             >
               متابعة حالة الطلب
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profileSetup) {
+    return (
+      <div className="min-h-screen bg-gray-50" dir="rtl">
+        <div className="bg-amber-600 text-white p-4 sticky top-0 z-10">
+          <button
+            onClick={() => navigate("/teacher/dashboard")}
+            className="flex items-center gap-2 hover:opacity-90"
+          >
+            <ArrowRight className="w-5 h-5" />
+            الرجوع
+          </button>
+        </div>
+        <div className="max-w-md mx-auto p-4">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="w-8 h-8 text-amber-500" />
+              <p className="font-bold text-gray-900">أكمل ملفك الشخصي أولاً</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-5">
+              قبل رفع الوثائق، يجب عليك إكمال بيانات ملفك الشخصي مثل صورتك
+              الشخصية ومعلومات التواصل والعنوان.
+            </p>
+            <button
+              onClick={() => navigate("/teacher/profile-setup")}
+              className="w-full bg-amber-600 text-white font-bold py-3 rounded-xl hover:bg-amber-700 transition flex items-center justify-center gap-2"
+            >
+              <FileText className="w-5 h-5" />
+              أكمل بيانات الملف الشخصي
             </button>
           </div>
         </div>
@@ -158,21 +232,34 @@ export function TeacherApplyPage() {
     <div className="min-h-screen bg-gray-50" dir="rtl">
       {/* Header */}
       <div className="bg-green-700 text-white p-4 sticky top-0 z-10">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-2 hover:opacity-90">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 hover:opacity-90"
+        >
           <ArrowRight className="w-5 h-5" />
           رجوع
         </button>
       </div>
 
       <div className="max-w-2xl mx-auto p-4 sm:p-6">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl shadow-lg p-5 sm:p-8">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">التقديم كمعلم</h1>
-          <p className="text-sm text-gray-600 mb-6">املأ بياناتك وارفع المستندات المطلوبة (محاكاة رفع الملفات).</p>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-2xl shadow-lg p-5 sm:p-8"
+        >
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+            التقديم كمعلم
+          </h1>
+          <p className="text-sm text-gray-600 mb-6">
+            املأ بياناتك وارفع المستندات المطلوبة (محاكاة رفع الملفات).
+          </p>
 
           {/* Basic info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">الاسم الكامل</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                الاسم الكامل
+              </label>
               <input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -180,7 +267,9 @@ export function TeacherApplyPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">رقم الجوال</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                رقم الجوال
+              </label>
               <input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -189,7 +278,9 @@ export function TeacherApplyPage() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                البريد الإلكتروني
+              </label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -198,7 +289,9 @@ export function TeacherApplyPage() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-sm font-bold text-gray-700 mb-2">نبذة مختصرة</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                نبذة مختصرة
+              </label>
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
@@ -215,15 +308,22 @@ export function TeacherApplyPage() {
               {(Object.keys(docs) as DocKey[]).map((key) => {
                 const uploaded = !!docs[key];
                 return (
-                  <div key={key} className="border border-gray-200 rounded-2xl p-4">
+                  <div
+                    key={key}
+                    className="border border-gray-200 rounded-2xl p-4"
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-start gap-3 min-w-0">
                         <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
                           <FileText className="w-5 h-5 text-gray-600" />
                         </div>
                         <div className="min-w-0">
-                          <p className="font-bold text-gray-900 text-sm sm:text-base">{docLabels[key]}</p>
-                          <p className="text-xs text-gray-600 break-words">{uploaded ? docs[key] : 'لم يتم الرفع بعد'}</p>
+                          <p className="font-bold text-gray-900 text-sm sm:text-base">
+                            {docLabels[key]}
+                          </p>
+                          <p className="text-xs text-gray-600 break-words">
+                            {uploaded ? docs[key] : "لم يتم الرفع بعد"}
+                          </p>
                         </div>
                       </div>
                       <label className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-green-700 text-white text-sm font-bold hover:bg-green-800 transition cursor-pointer flex-shrink-0">
@@ -232,7 +332,9 @@ export function TeacherApplyPage() {
                         <input
                           type="file"
                           className="hidden"
-                          onChange={(e) => handleUpload(key, e.target.files?.[0])}
+                          onChange={(e) =>
+                            handleUpload(key, e.target.files?.[0])
+                          }
                           accept="application/pdf,image/*"
                         />
                       </label>
@@ -244,7 +346,9 @@ export function TeacherApplyPage() {
 
             {missingDocs.length > 0 && (
               <div className="mt-4 p-4 rounded-2xl bg-amber-50 border border-amber-200">
-                <p className="text-sm font-bold text-amber-800">يرجى رفع جميع المستندات قبل الإرسال.</p>
+                <p className="text-sm font-bold text-amber-800">
+                  يرجى رفع جميع المستندات قبل الإرسال.
+                </p>
               </div>
             )}
           </div>
@@ -254,11 +358,12 @@ export function TeacherApplyPage() {
             onClick={handleSubmit}
             className="mt-6 w-full bg-green-700 text-white font-bold py-3.5 rounded-2xl hover:bg-green-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {submitting ? 'جاري الإرسال...' : 'إرسال الطلب'}
+            {submitting ? "جاري الإرسال..." : "إرسال الطلب"}
           </button>
 
           <p className="mt-3 text-xs text-gray-500">
-            ملاحظة: هذه تجربة محاكاة. يتم حفظ البيانات محلياً في المتصفح (localStorage).
+            ملاحظة: هذه تجربة محاكاة. يتم حفظ البيانات محلياً في المتصفح
+            (localStorage).
           </p>
         </motion.div>
       </div>

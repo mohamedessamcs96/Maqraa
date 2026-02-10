@@ -1,17 +1,24 @@
-import type { Payment, Session, TeacherApplication, TeacherService } from '../types';
+import type {
+  Payment,
+  Session,
+  TeacherApplication,
+  TeacherService,
+  TeacherProfileSetup,
+} from "../types";
 
 /**
- * Very small localStorage wrapper for our “simulated backend”.
+ * Very small localStorage wrapper for our "simulated backend".
  * - Uses JSON serialization
  * - Returns defaults when nothing is stored
  * - Keeps types close to backend spec entities
  */
 
 const keys = {
-  teacherApplications: 'maqraa_teacher_applications',
-  teacherServices: 'maqraa_teacher_services',
-  sessions: 'maqraa_sessions',
-  payments: 'maqraa_payments',
+  teacherApplications: "maqraa_teacher_applications",
+  teacherServices: "maqraa_teacher_services",
+  sessions: "maqraa_sessions",
+  payments: "maqraa_payments",
+  teacherProfileSetups: "maqraa_teacher_profile_setups",
 } as const;
 
 function readJson<T>(key: string, fallback: T): T {
@@ -58,5 +65,13 @@ export const storage = {
   },
   savePayments(payments: Payment[]) {
     writeJson(keys.payments, payments);
+  },
+
+  // Teacher profile setups
+  getTeacherProfileSetups(): TeacherProfileSetup[] {
+    return readJson<TeacherProfileSetup[]>(keys.teacherProfileSetups, []);
+  },
+  saveTeacherProfileSetups(setups: TeacherProfileSetup[]) {
+    writeJson(keys.teacherProfileSetups, setups);
   },
 };
