@@ -5,6 +5,7 @@ import type {
   TeacherService,
   TeacherProfileSetup,
 } from "../types";
+import { api } from "./api";
 
 /**
  * Very small localStorage wrapper for our "simulated backend".
@@ -37,10 +38,30 @@ function writeJson<T>(key: string, value: T) {
 
 export const storage = {
   // Teacher applications
-  getTeacherApplications(): TeacherApplication[] {
+  async getTeacherApplications(): Promise<TeacherApplication[]> {
+    if (api.isEnabled()) {
+      try {
+        const res = await api.getTeacherApplications();
+        const data = (res as any)?.data ?? null;
+        return Array.isArray(data) ? data : [];
+      } catch {
+        return readJson<TeacherApplication[]>(keys.teacherApplications, []);
+      }
+    }
     return readJson<TeacherApplication[]>(keys.teacherApplications, []);
   },
   saveTeacherApplications(apps: TeacherApplication[]) {
+    if (api.isEnabled()) {
+      try {
+        // best-effort: POST each app to API
+        apps.forEach((a) => {
+          // fire-and-forget
+          api.submitTeacherApplication(a).catch(() => null);
+        });
+      } catch {
+        /* ignore */
+      }
+    }
     writeJson(keys.teacherApplications, apps);
   },
 
@@ -68,10 +89,26 @@ export const storage = {
   },
 
   // Teacher profile setups
-  getTeacherProfileSetups(): TeacherProfileSetup[] {
+  async getTeacherProfileSetups(): Promise<TeacherProfileSetup[]> {
+    if (api.isEnabled()) {
+      try {
+        const res = await api.getTeacherProfileSetups();
+        const data = (res as any)?.data ?? null;
+        return Array.isArray(data) ? data : [];
+      } catch {
+        return readJson<TeacherProfileSetup[]>(keys.teacherProfileSetups, []);
+      }
+    }
     return readJson<TeacherProfileSetup[]>(keys.teacherProfileSetups, []);
   },
   saveTeacherProfileSetups(setups: TeacherProfileSetup[]) {
+    if (api.isEnabled()) {
+      try {
+        setups.forEach((s) => api.saveTeacherProfileSetup(s).catch(() => null));
+      } catch {
+        /* ignore */
+      }
+    }
     writeJson(keys.teacherProfileSetups, setups);
   },
 };

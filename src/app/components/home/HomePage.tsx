@@ -50,7 +50,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Header */}
       <div
         className="relative overflow-hidden pt-8 pb-12"
-        style={{ backgroundColor: '#486837', color: '#ffffff' }}
+        style={{ backgroundColor: 'var(--brand-primary)', color: '#ffffff' }}
       >
         <div className="max-w-md mx-auto px-6">
           <motion.div
@@ -59,7 +59,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <div className="inline-block p-8 rounded-full" style={{ backgroundColor: '#ad9f4e' }}>
+            <div className="inline-block p-8 rounded-full" style={{ backgroundColor: 'var(--brand-gold)' }}>
               <MiqraaLogo size="small" showTagline={false} />
             </div>
             <h1 className="text-2xl font-bold mt-4">مرحباً بك</h1>

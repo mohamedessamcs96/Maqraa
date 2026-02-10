@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { storage } from "../../lib/storage";
@@ -21,11 +21,22 @@ export function TeacherDashboard() {
   const { user, logout } = useAuthContext();
   const navigate = useNavigate();
 
-  const profileSetup = useMemo(() => {
-    if (!user) return null;
-    const setups = storage.getTeacherProfileSetups?.();
-    if (!setups) return null;
-    return setups.find((s) => s.teacherId === user.id) ?? null;
+  const [profileSetup, setProfileSetup] = useState<any | null>(null);
+  useEffect(() => {
+    let mounted = true;
+    if (!user) return;
+    (async () => {
+      try {
+        const setups = (await storage.getTeacherProfileSetups?.()) ?? [];
+        if (!mounted) return;
+        setProfileSetup(setups.find((s) => s.teacherId === user.id) ?? null);
+      } catch (err) {
+        // ignore
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, [user]);
 
   const teacherEmailMap: Record<string, string> = {

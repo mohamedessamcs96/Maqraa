@@ -14,7 +14,7 @@ export function AssessmentIntroScreen({ onStart, onSkip }: AssessmentIntroScreen
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-white" dir="rtl">
       <div className="mx-auto w-full max-w-md px-3 sm:px-4 py-5 sm:py-8">
         {/* Header */}
-        <div className="mb-3 flex items-center justify-between rounded-2xl bg-[#486837] px-3 py-3 text-white shadow-sm">
+        <div className="mb-3 flex items-center justify-between rounded-2xl bg-[var(--brand-primary)] px-3 py-3 text-white shadow-sm">
           <button
             type="button"
             onClick={() => navigate(-1)}
@@ -67,7 +67,7 @@ export function AssessmentIntroScreen({ onStart, onSkip }: AssessmentIntroScreen
           <motion.button
             whileTap={{ scale: 0.98 }}
             onClick={onStart}
-            className="mt-5 sm:mt-6 w-full rounded-2xl bg-[#486837] px-5 sm:px-6 py-3.5 sm:py-4 text-sm sm:text-base font-extrabold text-white shadow-sm hover:bg-[#3b552d] transition flex items-center justify-center gap-2"
+            className="mt-5 sm:mt-6 w-full rounded-2xl bg-[var(--brand-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-sm sm:text-base font-extrabold text-white shadow-sm hover:bg-[var(--brand-primary-dark)] transition flex items-center justify-center gap-2"
           >
             <ArrowLeft className="h-5 w-5" />
             ابدأ الاختبار (اختياري)

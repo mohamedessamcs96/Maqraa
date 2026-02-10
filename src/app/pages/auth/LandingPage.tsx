@@ -62,13 +62,13 @@ export function LandingPage({}: LandingPageProps) {
                 className="w-10 h-10 md:w-14 md:h-14 object-contain"
               />
             </div>
-            <span className="text-lg md:text-2xl font-bold text-[#486837]">مقرأة</span>
+            <span className="text-lg md:text-2xl font-bold text-[var(--brand-primary)]">مقرأة</span>
           </motion.div>
           <div className="flex gap-2 md:gap-4">
             {isAuthenticated && user ? (
               <>
                 <div className="flex items-center gap-2 px-3 md:px-4 py-2">
-                  <div className="w-8 h-8 rounded-full bg-[#486837] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[var(--brand-primary)] flex items-center justify-center">
                     <span className="text-white text-sm font-bold">{user.name[0]}</span>
                   </div>
                   <span className="text-xs md:text-sm text-gray-700 hidden sm:inline">{user.name}</span>
@@ -76,7 +76,7 @@ export function LandingPage({}: LandingPageProps) {
                 {user.role === 'teacher' && (
                   <button
                     onClick={() => navigate('/teacher/documents')}
-                    className="px-3 md:px-4 py-2 text-sm md:text-base text-[#486837] hover:text-[#3a5029] transition hidden sm:inline"
+                    className="px-3 md:px-4 py-2 text-sm md:text-base text-[var(--brand-primary)] hover:text-[var(--brand-primary-dark)] transition hidden sm:inline"
                   >
                     المستندات
                   </button>
@@ -103,7 +103,7 @@ export function LandingPage({}: LandingPageProps) {
                 </button>
                 <button
                   onClick={() => navigate('/signup')}
-                  className="px-4 md:px-6 py-2 text-sm md:text-base bg-[#486837] text-white rounded-lg hover:bg-[#3a5029] transition"
+                  className="px-4 md:px-6 py-2 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg hover:bg-[var(--brand-primary-dark)] transition"
                 >
                   إنشاء حساب
                 </button>
@@ -121,7 +121,7 @@ export function LandingPage({}: LandingPageProps) {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
-            تعلم القرآن من <span className="text-[#486837]">معلمين معتمدين</span>
+            تعلم القرآن من <span className="text-[var(--brand-primary)]">معلمين معتمدين</span>
           </h1>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto">
             منصة تعليمية متخصصة تربط المتعلمين مع معلمي القرآن الموثوقين للحصول على تعليم عالي الجودة
@@ -129,14 +129,14 @@ export function LandingPage({}: LandingPageProps) {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-10 md:mb-16">
             <button
               onClick={() => navigate('/signup?role=learner')}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition flex items-center justify-center gap-2"
+              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition flex items-center justify-center gap-2"
             >
               ابدأ كمتعلم
               <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
             </button>
             <button
               onClick={() => navigate('/signup?role=teacher')}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-[#486837] text-[#486837] rounded-lg font-bold hover:bg-[#486837]/5 transition"
+              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-[var(--brand-primary)] text-[var(--brand-primary)] rounded-lg font-bold hover:bg-[#486837]/5 transition"
             >
               تقدم كمعلم
             </button>
@@ -154,7 +154,7 @@ export function LandingPage({}: LandingPageProps) {
                   transition={{ delay: index * 0.1 }}
                   className="p-3 md:p-4"
                 >
-                  <Icon className="w-6 md:w-8 h-6 md:h-8 text-[#486837] mx-auto mb-2 md:mb-3" />
+                  <Icon className="w-6 md:w-8 h-6 md:h-8 text-[var(--brand-primary)] mx-auto mb-2 md:mb-3" />
                   <p className="font-semibold text-sm md:text-base text-gray-800">{feature.label}</p>
                 </motion.div>
               );
@@ -207,7 +207,7 @@ export function LandingPage({}: LandingPageProps) {
                 whileTap={{ scale: 0.95 }}
                 className={`p-4 md:p-6 rounded-2xl transition-all duration-300 flex flex-col items-center gap-2 md:gap-3 ${
                   selectedServiceIndex === index
-                    ? 'bg-[#486837] text-white shadow-lg'
+                    ? 'bg-[var(--brand-primary)] text-white shadow-lg'
                     : 'bg-white text-gray-900 shadow-md hover:shadow-lg border-2 border-gray-100'
                 }`}
               >
@@ -230,7 +230,7 @@ export function LandingPage({}: LandingPageProps) {
             const Icon = services[selectedServiceIndex].icon;
             return (
               <>
-                <Icon className="w-14 md:w-20 h-14 md:h-20 text-[#486837] mx-auto mb-4 md:mb-6" />
+                <Icon className="w-14 md:w-20 h-14 md:h-20 text-[var(--brand-primary)] mx-auto mb-4 md:mb-6" />
                 <h3 className="text-xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
                   {services[selectedServiceIndex].title}
                 </h3>
@@ -239,7 +239,7 @@ export function LandingPage({}: LandingPageProps) {
                 </p>
                 <button
                   onClick={() => navigate('/signup?role=learner')}
-                  className="px-6 md:px-8 py-2 md:py-3 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition inline-flex items-center gap-2"
+                  className="px-6 md:px-8 py-2 md:py-3 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition inline-flex items-center gap-2"
                 >
                   ابدأ الآن
                   <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
@@ -310,7 +310,7 @@ export function LandingPage({}: LandingPageProps) {
         <div className="text-center">
           <button
             onClick={() => navigate('/learner/teachers')}
-            className="px-5 md:px-6 py-2 md:py-3 text-sm md:text-base bg-[#486837] text-white rounded-lg font-bold hover:bg-[#3a5029] transition"
+            className="px-5 md:px-6 py-2 md:py-3 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition"
           >
             عرض جميع المعلمين
           </button>
@@ -322,7 +322,7 @@ export function LandingPage({}: LandingPageProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-[#486837] to-[#3a5029] rounded-3xl p-6 md:p-12 text-white text-center"
+          className="bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-primary-dark)] rounded-3xl p-6 md:p-12 text-white text-center"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">ابدأ رحلتك القرآنية اليوم</h2>
           <p className="text-sm md:text-lg mb-6 md:mb-8 opacity-90">
@@ -331,7 +331,7 @@ export function LandingPage({}: LandingPageProps) {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <button
               onClick={() => navigate('/signup?role=learner')}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-white text-[#486837] rounded-lg font-bold hover:bg-gray-100 transition"
+              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-white text-[var(--brand-primary)] rounded-lg font-bold hover:bg-gray-100 transition"
             >
               إنشاء حساب متعلم
             </button>

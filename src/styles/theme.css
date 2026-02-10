@@ -2,19 +2,37 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
+  /* Maqraa brand palette (from mobile AppColors) */
+  --brand-primary: #486837;
+  --brand-primary-light: #5e8548;
+  --brand-primary-dark: #345028;
+
+  --brand-gold: #ad9f4e;
+  --brand-gold-light: #c7bb72;
+  --brand-gold-dark: #8a7e3b;
+
+  --brand-cream: #fcf8e8;
+  --brand-cream-dark: #f5edcc;
+
+  /* Surface / scaffold tokens (match mobile) */
+  --scaffold: #f9f7f0;
+  --surface: #ffffff;
+  --surface-variant: #f3f0e5;
+
+  /* Map existing semantic tokens to brand tokens */
+  --background: var(--scaffold);
   --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
+  --card: var(--surface);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
+  --primary: var(--brand-primary);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.95 0.0058 264.53);
   --secondary-foreground: #030213;
   --muted: #ececf0;
   --muted-foreground: #717182;
-  --accent: #e9ebef;
+  --accent: var(--brand-gold);
   --accent-foreground: #030213;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
@@ -181,7 +199,9 @@
 }
 
 /* Mobile optimizations */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -195,7 +215,9 @@ body {
 
 /* Prevent white gaps on iOS */
 @supports (-webkit-touch-callout: none) {
-  html, body, #root {
+  html,
+  body,
+  #root {
     min-height: -webkit-fill-available;
     height: -webkit-fill-available;
   }

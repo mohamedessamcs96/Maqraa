@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import {
@@ -47,11 +47,38 @@ export function TeacherProfileSetupPage() {
   const [submitting, setSubmitting] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState("");
 
-  const existingSetup = useMemo(() => {
-    if (!user) return null;
-    const setups = storage.getTeacherProfileSetups?.();
-    if (!setups) return null;
-    return setups.find((s) => s.teacherId === user.id) ?? null;
+  const [existingSetup, setExistingSetup] =
+    useState<TeacherProfileSetup | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    if (!user) return;
+    (async () => {
+      try {
+        const setups = (await storage.getTeacherProfileSetups?.()) ?? [];
+        if (!mounted) return;
+        const found = setups.find((s) => s.teacherId === user.id) ?? null;
+        setExistingSetup(found as any);
+        if (found) {
+          setProfilePictureId(found.profilePictureId || "");
+          setDateOfBirth(found.dateOfBirth || "");
+          setSelectedLanguages(found.languages || []);
+          setBio(found.bio || user?.bio || "");
+          setNationality(found.nationality || "");
+          setCountry(found.country || "");
+          setCity(found.city || "");
+          setStreet(found.street || "");
+          setBuilding(found.building || "");
+          setPostalCode(found.postalCode || "");
+          setGender(found.gender || "male");
+        }
+      } catch (err) {
+        // ignore
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, [user]);
 
   const isTeacher = user?.role === "teacher";
@@ -106,10 +133,13 @@ export function TeacherProfileSetupPage() {
         completedAt: now,
       };
 
-      // Save to localStorage
-      const setups = storage.getTeacherProfileSetups?.() ?? [];
+      // Save via storage (may call API)
+      const setups = (await storage.getTeacherProfileSetups?.()) ?? [];
       const withoutCurrent = setups.filter((s) => s.teacherId !== user.id);
-      storage.saveTeacherProfileSetups?.([profileSetup, ...withoutCurrent]);
+      await storage.saveTeacherProfileSetups?.([
+        profileSetup,
+        ...withoutCurrent,
+      ]);
 
       // Navigate to the application page
       navigate("/teacher/apply");

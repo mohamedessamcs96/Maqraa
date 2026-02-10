@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import {
@@ -41,20 +41,30 @@ export function TeacherApplyPage() {
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [existingApp, setExistingApp] = useState<TeacherApplication | null>(
+    null,
+  );
+  const [profileSetup, setProfileSetup] = useState<any | null>(null);
 
-  const existingApp = useMemo(() => {
-    if (!user) return null;
-    return (
-      storage.getTeacherApplications().find((a) => a.teacherId === user.id) ??
-      null
-    );
-  }, [user]);
+  useEffect(() => {
+    let mounted = true;
+    if (!user) return;
+    (async () => {
+      try {
+        const apps = (await storage.getTeacherApplications?.()) ?? [];
+        if (!mounted) return;
+        setExistingApp(apps.find((a) => a.teacherId === user.id) ?? null);
 
-  const profileSetup = useMemo(() => {
-    if (!user) return null;
-    const setups = storage.getTeacherProfileSetups?.();
-    if (!setups) return null;
-    return setups.find((s) => s.teacherId === user.id) ?? null;
+        const setups = (await storage.getTeacherProfileSetups?.()) ?? [];
+        if (!mounted) return;
+        setProfileSetup(setups.find((s) => s.teacherId === user.id) ?? null);
+      } catch (err) {
+        // ignore
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, [user]);
 
   const isTeacher = user?.role === "teacher";
@@ -85,7 +95,7 @@ export function TeacherApplyPage() {
 
     setSubmitting(true);
     try {
-      const apps = storage.getTeacherApplications();
+      const apps = (await storage.getTeacherApplications?.()) ?? [];
       const now = new Date().toISOString();
 
       const newApp: TeacherApplication = {
