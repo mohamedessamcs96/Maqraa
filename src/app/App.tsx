@@ -52,11 +52,28 @@ import { TeacherProfileSetupPage } from "./pages/teacher/TeacherProfileSetupPage
 import { TeacherServicesPage } from "./pages/teacher/TeacherServicesPage";
 import { useAuthContext } from "./context/AuthContext";
 
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import { AdminApplicationsPage } from "./pages/admin/AdminApplicationsPage";
+import { AdminApplicationDetailPage } from "./pages/admin/AdminApplicationDetailPage";
+import { AdminServicesPage } from "./pages/admin/AdminServicesPage";
+import { AdminServiceDetailPage } from "./pages/admin/AdminServiceDetailPage";
+import { AdminManageTeachersPage } from "./pages/admin/AdminManageTeachersPage";
+import { AdminManageServicesPage } from "./pages/admin/AdminManageServicesPage";
+
 function LearnerOnly({ children }: { children: React.ReactNode }) {
   const { user, isAuthenticated } = useAuthContext();
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
   if (user?.role !== "learner") return <Navigate to="/" replace />;
+
+  return <>{children}</>;
+}
+
+function AdminOnly({ children }: { children: React.ReactNode }) {
+  const { user, isAuthenticated } = useAuthContext();
+
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (user?.role !== "admin") return <Navigate to="/" replace />;
 
   return <>{children}</>;
 }
@@ -350,6 +367,64 @@ export default function App() {
             <Route
               path="/teacher/application-status"
               element={<TeacherApplicationStatusPage />}
+            />
+
+            {/* Admin Pages */}
+            <Route
+              path="/admin"
+              element={
+                <AdminOnly>
+                  <AdminDashboard />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/applications"
+              element={
+                <AdminOnly>
+                  <AdminApplicationsPage />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/applications/:id"
+              element={
+                <AdminOnly>
+                  <AdminApplicationDetailPage />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/services"
+              element={
+                <AdminOnly>
+                  <AdminServicesPage />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/services/:id"
+              element={
+                <AdminOnly>
+                  <AdminServiceDetailPage />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/manage-teachers"
+              element={
+                <AdminOnly>
+                  <AdminManageTeachersPage />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/manage-services"
+              element={
+                <AdminOnly>
+                  <AdminManageServicesPage />
+                </AdminOnly>
+              }
             />
 
             {/* Legacy App - redirect to old welcome flow */}

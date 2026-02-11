@@ -275,6 +275,61 @@ export const api = {
   async getTeacherApplications() {
     return request("/teachers/application/status/", { method: "GET" }, true);
   },
+
+  // Admin Applications
+  async getAdminApplications(status?: number) {
+    const query = status ? `?status=${status}` : "";
+    return request(`/admin/applications/${query}`, { method: "GET" }, true);
+  },
+
+  async getAdminApplicationDetail(id: number) {
+    return request(`/admin/applications/${id}/`, { method: "GET" }, true);
+  },
+
+  async approveTeacherApplication(
+    id: number,
+    payload: {
+      action: 1 | 2 | 3;
+      admin_notes?: string;
+      rejection_reason?: string;
+      required_documents?: string[];
+    },
+  ) {
+    return request(
+      `/admin/applications/${id}/approve/`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+      },
+      true,
+    );
+  },
+
+  // Admin Services
+  async getAdminTeacherServices(status?: number) {
+    const query = status ? `?status=${status}` : "";
+    return request(`/admin/teacher-services/${query}`, { method: "GET" }, true);
+  },
+
+  async approveTeacherService(
+    id: number,
+    payload: {
+      action: "approve" | "adjust_rate" | "reject";
+      admin_notes?: string;
+      admin_final_rate?: string;
+    },
+  ) {
+    return request(
+      `/admin/teacher-services/${id}/approve/`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+      },
+      true,
+    );
+  },
 };
 
 export default api;
