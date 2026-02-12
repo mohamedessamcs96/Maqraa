@@ -74,7 +74,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
   if (submitted) {
     return (
       <div
-        className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center p-4"
+        className="min-h-screen bg-[#FCF8E8] flex items-center justify-center p-4"
         dir="rtl"
       >
         <motion.div
@@ -82,8 +82,8 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
           animate={{ opacity: 1, scale: 1 }}
           className="bg-white rounded-2xl p-8 shadow-xl max-w-md w-full text-center"
         >
-          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-            <ArrowRight className="w-8 h-8 text-green-700" />
+          <div className="w-16 h-16 rounded-full bg-[var(--brand-cream)] flex items-center justify-center mx-auto mb-6">
+            <ArrowRight className="w-8 h-8 text-[var(--brand-primary)]" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             تم التسجيل بنجاح!
@@ -100,7 +100,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center p-4"
+      className="min-h-screen bg-[#FCF8E8] flex items-center justify-center p-4"
       dir="rtl"
     >
       <motion.div
@@ -128,11 +128,11 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
                 onClick={() => setFormData({ ...formData, role })}
                 className={`p-4 rounded-lg border-2 font-bold transition ${
                   formData.role === role
-                    ? "border-green-700 bg-green-50 text-green-700"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-green-200"
+                    ? "border-[var(--brand-primary)] bg-[var(--brand-cream)] text-[var(--brand-primary)]"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-[var(--brand-primary)]"
                 }`}
               >
-                {role === "learner" ? "👨‍🎓 متعلم" : "👨‍🏫 معلم"}
+                {role === "learner" ? "متعلم" : "معلم"}
               </button>
             ))}
           </div>
@@ -153,7 +153,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-700 focus:outline-none"
+                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-[var(--brand-primary)] focus:outline-none"
                 placeholder="اسمك الكامل"
               />
             </div>
@@ -178,7 +178,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-700 focus:outline-none"
+                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-[var(--brand-primary)] focus:outline-none"
                 placeholder="your@email.com"
               />
             </div>
@@ -203,7 +203,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
-                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-700 focus:outline-none"
+                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-[var(--brand-primary)] focus:outline-none"
                 placeholder="••••••••"
               />
             </div>
@@ -228,7 +228,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, confirmPassword: e.target.value })
                 }
-                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-green-700 focus:outline-none"
+                className="w-full pr-10 pl-4 py-2 border-2 border-gray-200 rounded-lg focus:border-[var(--brand-primary)] focus:outline-none"
                 placeholder="••••••••"
               />
             </div>
@@ -263,7 +263,7 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 bg-[var(--brand-primary)] text-white font-bold rounded-lg hover:bg-[var(--brand-primary-dark)] transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "جاري التسجيل..." : "إنشاء حساب"}
           </button>
@@ -274,9 +274,9 @@ export function SignUpPage({ initialRole = "learner" }: SignUpPageProps) {
           هل لديك حساب بالفعل؟{" "}
           <button
             onClick={() => navigate("/login")}
-            className="text-green-700 font-bold hover:underline"
+            className="text-[var(--brand-primary)] font-bold hover:underline"
           >
-            دخول الآن
+            تسجيل دخول
           </button>
         </p>
       </motion.div>

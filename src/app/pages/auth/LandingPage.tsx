@@ -119,7 +119,7 @@ export function LandingPage({}: LandingPageProps) {
                   onClick={() => navigate("/login")}
                   className="px-3 md:px-4 py-2 text-sm md:text-base text-gray-700 hover:text-gray-900 transition"
                 >
-                  دخول
+                  تسجيل دخول
                 </button>
                 <button
                   onClick={() => navigate("/signup")}
@@ -148,19 +148,12 @@ export function LandingPage({}: LandingPageProps) {
             منصة تعليمية متخصصة تربط المتعلمين مع معلمي القرآن الموثوقين للحصول
             على تعليم عالي الجودة
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-10 md:mb-16">
+          <div className="flex justify-center mb-8 md:mb-12">
             <button
-              onClick={() => navigate("/signup?role=learner")}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition flex items-center justify-center gap-2"
+              onClick={() => navigate("/signup")}
+              className="px-12 md:px-16 py-3 md:py-4 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition inline-flex items-center justify-center"
             >
-              ابدأ كمتعلم
-              <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
-            </button>
-            <button
-              onClick={() => navigate("/signup?role=teacher")}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-[var(--brand-primary)] text-[var(--brand-primary)] rounded-lg font-bold hover:bg-[#486837]/5 transition"
-            >
-              تقدم كمعلم
+              انضم إلينا
             </button>
           </div>
 
@@ -177,7 +170,7 @@ export function LandingPage({}: LandingPageProps) {
                   className="p-3 md:p-4"
                 >
                   <Icon className="w-6 md:w-8 h-6 md:h-8 text-[var(--brand-primary)] mx-auto mb-2 md:mb-3" />
-                  <p className="font-semibold text-sm md:text-base text-gray-800">
+                  <p className="font-semibold text-base md:text-lg text-gray-800">
                     {feature.label}
                   </p>
                 </motion.div>
@@ -219,66 +212,38 @@ export function LandingPage({}: LandingPageProps) {
           </motion.div>
         </section>
       )}
-      <section className="max-w-6xl mx-auto px-3 md:px-4 py-12 md:py-16">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 text-gray-900">
+      <section className="max-w-6xl mx-auto px-3 md:px-4 py-6 md:py-10">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 md:mb-10 text-gray-900">
           خدماتنا
         </h2>
 
         {/* Service Navigation Buttons */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8 md:mb-12">
+        <div className="flex flex-col items-center gap-6 md:gap-8 mb-8 md:mb-12">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.button
+              <motion.div
                 key={index}
-                onClick={() => setSelectedServiceIndex(index)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`p-4 md:p-6 rounded-2xl transition-all duration-300 flex flex-col items-center gap-2 md:gap-3 ${
-                  selectedServiceIndex === index
-                    ? "bg-[var(--brand-primary)] text-white shadow-lg"
-                    : "bg-white text-gray-900 shadow-md hover:shadow-lg border-2 border-gray-100"
-                }`}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="relative w-full max-w-3xl p-6 md:p-8 rounded-2xl bg-white text-gray-900 shadow-md"
               >
-                <Icon className="w-6 md:w-8 h-6 md:h-8" />
-                <span className="text-xs md:text-sm font-semibold text-center">
-                  {service.title}
-                </span>
-              </motion.button>
+                <div className="absolute -right-6 top-4 md:top-6 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--brand-primary)] flex items-center justify-center">
+                  <Icon className="w-4 md:w-5 h-4 md:h-5 text-white" />
+                </div>
+                <div className="text-right">
+                  <h4 className="text-lg md:text-xl font-semibold">
+                    {service.title}
+                  </h4>
+                  <p className="text-sm md:text-base text-gray-600 mt-2">
+                    {service.description}
+                  </p>
+                </div>
+              </motion.div>
             );
           })}
         </div>
-
-        {/* Selected Service Details */}
-        <motion.div
-          key={selectedServiceIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="bg-gradient-to-br from-[#486837]/5 to-[#ad9f4e]/10 rounded-3xl p-6 md:p-12 text-center"
-        >
-          {(() => {
-            const Icon = services[selectedServiceIndex].icon;
-            return (
-              <>
-                <Icon className="w-14 md:w-20 h-14 md:h-20 text-[var(--brand-primary)] mx-auto mb-4 md:mb-6" />
-                <h3 className="text-xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
-                  {services[selectedServiceIndex].title}
-                </h3>
-                <p className="text-sm md:text-xl text-gray-700 mb-6 md:mb-8 max-w-2xl mx-auto">
-                  {services[selectedServiceIndex].description}
-                </p>
-                <button
-                  onClick={() => navigate("/signup?role=learner")}
-                  className="px-6 md:px-8 py-2 md:py-3 text-sm md:text-base bg-[var(--brand-primary)] text-white rounded-lg font-bold hover:bg-[var(--brand-primary-dark)] transition inline-flex items-center gap-2"
-                >
-                  ابدأ الآن
-                  <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
-                </button>
-              </>
-            );
-          })()}
-        </motion.div>
       </section>
 
       {/* Featured Teachers */}
@@ -398,18 +363,12 @@ export function LandingPage({}: LandingPageProps) {
           <p className="text-sm md:text-lg mb-6 md:mb-8 opacity-90">
             اختر معلمك المفضل واحجز أول جلسة تعليمية مباشرة
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <div className="flex justify-center">
             <button
-              onClick={() => navigate("/signup?role=learner")}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-white text-[var(--brand-primary)] rounded-lg font-bold hover:bg-gray-100 transition"
+              onClick={() => navigate("/signup")}
+              className="px-8 md:px-12 py-3 md:py-4 text-sm md:text-base bg-white text-[var(--brand-primary)] rounded-lg font-bold hover:bg-gray-100 transition"
             >
-              إنشاء حساب متعلم
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition"
-            >
-              دخول الحساب
+              انضم إلينا
             </button>
           </div>
         </motion.div>
